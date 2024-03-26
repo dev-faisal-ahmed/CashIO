@@ -7,9 +7,20 @@ const CreateUserValidationSchema = z.object({
     .email({ message: 'Please provide a valid email' }),
 });
 
-export const UserValidation = { CreateUserValidationSchema };
+const LoginValidationSchema = z.object({
+  email: z
+    .string({ required_error: 'Email is Required' })
+    .email({ message: 'Please provide a valid email' }),
+});
+
+export const UserValidation = {
+  CreateUserValidationSchema,
+  LoginValidationSchema,
+};
 
 // types
 export type CreateUserValidationSchemaType = z.infer<
   typeof CreateUserValidationSchema
 >;
+
+export type LoginValidationSchemaType = z.infer<typeof LoginValidationSchema>;

@@ -6,7 +6,7 @@ import { UserController } from './User.Controller';
 export const UserRouter = Router();
 
 UserRouter.post(
-  '/',
+  '/register',
   ValidationHandler(UserValidation.CreateUserValidationSchema),
   UserController.CreateUser
 );

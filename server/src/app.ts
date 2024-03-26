@@ -1,5 +1,5 @@
-import express, { Response } from 'express';
 import cors from 'cors';
+import express, { Response } from 'express';
 import { GlobalErrorHandler } from './app/middlewares/GlobalErrorHandler';
 import { AppRouter } from './app/router/AppRouter';
 

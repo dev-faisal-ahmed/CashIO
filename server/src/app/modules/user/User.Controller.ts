@@ -1,9 +1,9 @@
 import { SendSuccessResponse } from '../../utils/ResponseHelper';
-import { TryCatch } from '../../utils/TryCatch';
 import { UserServices } from './User.Services';
+import { TryCatch } from '../../utils/TryCatch';
 
 const CreateUser = TryCatch(async (req, res) => {
-  const newUser = UserServices.CreateUser(req.body);
+  const newUser = await UserServices.CreateUser(req.body);
 
   SendSuccessResponse(res, {
     message: 'User Created',
@@ -12,4 +12,14 @@ const CreateUser = TryCatch(async (req, res) => {
   });
 });
 
-export const UserController = { CreateUser };
+const Login = TryCatch(async (req, res) => {
+  const token = await UserServices.CreateUser(req.body);
+
+  SendSuccessResponse(res, {
+    message: 'User Created',
+    data: token,
+    status: 200,
+  });
+});
+
+export const UserController = { CreateUser, Login };
