@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { AuthGuard } from '../../middlewares/AuthGuard';
 import { ValidationHandler } from '../../middlewares/ValidationHandler';
-import { SourceValidations } from './Source.Validation';
+import { SourceValidation } from './Source.Validation';
 import { SourceController } from './Source.Controller';
 
 export const SourceRouter = Router();
@@ -9,6 +9,6 @@ export const SourceRouter = Router();
 SourceRouter.post(
   '/',
   AuthGuard(),
-  ValidationHandler(SourceValidations.CreateSourceSchema),
+  ValidationHandler(SourceValidation.CreateSourceSchema),
   SourceController.CreateSource
 );
