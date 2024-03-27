@@ -7,8 +7,8 @@ export const GlobalErrorHandler: ErrorRequestHandler = (
   res,
   next
 ) => {
-  let status: number = 500;
-  let message: string = 'something went wrong';
+  let status: number = err.status || 500;
+  let message: string = err.message || 'something went wrong';
 
   return SendErrorResponse(res, { message, status, error: err });
 };

@@ -13,7 +13,7 @@ const CreateUser = TryCatch(async (req, res) => {
 });
 
 const Login = TryCatch(async (req, res) => {
-  const token = await UserServices.CreateUser(req.body);
+  const token = await UserServices.Login(req.body);
 
   SendSuccessResponse(res, {
     message: 'User Created',

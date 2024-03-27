@@ -10,3 +10,9 @@ UserRouter.post(
   ValidationHandler(UserValidation.CreateUserValidationSchema),
   UserController.CreateUser
 );
+
+UserRouter.post(
+  '/login',
+  ValidationHandler(UserValidation.LoginValidationSchema),
+  UserController.Login
+);
