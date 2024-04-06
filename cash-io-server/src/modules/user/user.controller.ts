@@ -13,4 +13,14 @@ const registerUser = tryCatch(async (req, res) => {
   });
 });
 
-export const userController = { registerUser };
+const loginUser = tryCatch(async (req, res) => {
+  const userData = await userServices.loginUser(req.body);
+
+  sendSuccessResponse(res, {
+    status: StatusCodes.OK,
+    message: 'User Successfully Logged In',
+    data: userData,
+  });
+});
+
+export const userController = { registerUser, loginUser };
