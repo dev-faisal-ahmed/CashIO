@@ -1,11 +1,11 @@
 import { StatusCodes } from 'http-status-codes';
 import { AppError } from '../../../utils/app.error';
 import { User } from '../user.model';
-import { LoginPayloadType } from '../user.validation';
+import { TLoginPayload } from '../user.validation';
 import jwt, { Secret } from 'jsonwebtoken';
 import { JWT_SECRET } from '../../../config';
 
-export const loginUser = async (payload: LoginPayloadType) => {
+export const loginUser = async (payload: TLoginPayload) => {
   const user = await User.findOne({ email: payload.email });
 
   // no user found

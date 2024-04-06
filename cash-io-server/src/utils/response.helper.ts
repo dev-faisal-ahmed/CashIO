@@ -1,18 +1,18 @@
 import { Response } from 'express';
 
-type SuccessResponseType = { data: any; message: string; status: number };
-type ErrorResponseType = { error: any; message: string; status: number };
+type TSuccessResponse = { data: any; message: string; status: number };
+type TErrorResponse = { error: any; message: string; status: number };
 
 export function sendSuccessResponse(
   res: Response,
-  { status, data, message }: SuccessResponseType,
+  { status, data, message }: TSuccessResponse
 ) {
   return res.status(status).json({ ok: true, message, data });
 }
 
 export function sendErrorResponse(
   res: Response,
-  { status, message, error }: ErrorResponseType,
+  { status, message, error }: TErrorResponse
 ) {
   return res.status(status).json({ ok: false, message, error });
 }

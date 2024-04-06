@@ -15,5 +15,5 @@ const LoginUser = z.object({
 
 export const userValidation = { RegisterUser, LoginUser };
 
-export type RegistrationPayloadType = z.infer<typeof RegisterUser>;
-export type LoginPayloadType = z.infer<typeof LoginUser>;
+export type TRegistrationPayload = z.infer<typeof RegisterUser>;
+export type TLoginPayload = z.infer<typeof LoginUser>;
