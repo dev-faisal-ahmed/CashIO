@@ -20,16 +20,20 @@ export const createTransaction = async (
     session.startTransaction();
     // checking if source exist?
     const isSourceExist = await Source.findOne({ _id: sourceId, userId });
-
     if (!isSourceExist)
       throw new AppError('Source not found', StatusCodes.NOT_FOUND);
 
-    const { sourceType: transactionType } = isSourceExist.toObject();
+    // checking if wallet exist ?
+    const isWalletExist = await Wallet.findOne({ _id: walletId, userId });
+    if (!isWalletExist)
+      throw new AppError('Wallet not found', StatusCodes.NOT_FOUND);
+
+    const { type } = isSourceExist.toObject();
     const date = new Date(payload.date);
 
     // adding new transactions
     const [newTransaction] = await Transaction.create(
-      [{ ...payload, userId, transactionType, date }],
+      [{ ...payload, userId, type, date }],
       { session }
     );
 
@@ -41,7 +45,7 @@ export const createTransaction = async (
 
     // update users balance
     const userUpdateQuery =
-      transactionType === 'INCOME'
+      type === 'INCOME'
         ? { $inc: { income: amount - fee } }
         : { $inc: { expense: amount + fee } };
 
@@ -59,7 +63,7 @@ export const createTransaction = async (
 
     // update wallet balance
     const updateWalletQuery =
-      transactionType === 'INCOME'
+      type === 'INCOME'
         ? { $inc: { income: amount - fee } }
         : { $inc: { expense: amount + fee } };
 

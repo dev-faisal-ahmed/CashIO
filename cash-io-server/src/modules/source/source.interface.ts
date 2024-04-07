@@ -8,6 +8,6 @@ export type TSource = {
   name: string;
   amount: number;
   budget: number;
-  sourceType: TSourceType;
+  type: TSourceType;
   icon: string;
 };
