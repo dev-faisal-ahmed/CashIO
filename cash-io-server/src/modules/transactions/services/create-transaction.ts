@@ -31,6 +31,8 @@ export const createTransaction = async (
     const { type } = isSourceExist.toObject();
     const date = new Date(payload.date);
 
+    console.log(type);
+
     // adding new transactions
     const [newTransaction] = await Transaction.create(
       [{ ...payload, userId, type, date }],

@@ -8,7 +8,7 @@ const TransactionSchema = new Schema<TTransaction>({
   sourceId: { type: Schema.Types.ObjectId, ref: 'source', required: true },
   amount: { type: Number, required: true },
   date: { type: Date, required: true },
-  transactionType: { type: String, enum: transactionTypes, required: true },
+  type: { type: String, enum: transactionTypes, required: true },
   fee: { type: Number, default: 0 },
 });
 

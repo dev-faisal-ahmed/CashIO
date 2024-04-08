@@ -7,7 +7,7 @@ const SourceSchema = new Schema<TSource>({
   userId: { type: Schema.Types.ObjectId, ref: 'user', required: true },
   budget: { type: Number, default: 0 },
   icon: { type: String, required: true },
-  sourceType: { type: String, enum: sourceTypes, required: true },
+  type: { type: String, enum: sourceTypes, required: true },
 });
 
 export const Source = model('source', SourceSchema);

@@ -5,6 +5,7 @@ import { walletRouter } from './modules/wallet/wallet.router';
 import { transactionRouter } from './modules/transactions/transaction.router';
 import { contactRouter } from './modules/contact/contact.router';
 import { lendRouter } from './modules/lend/lend.router';
+import { transferRouter } from './modules/transfer/transfer.router';
 
 export const appRouter = Router();
 
@@ -14,3 +15,4 @@ appRouter.use('/wallet', walletRouter);
 appRouter.use('/transaction', transactionRouter);
 appRouter.use('/contact', contactRouter);
 appRouter.use('/lend', lendRouter);
+appRouter.use('/transfer', transferRouter);
