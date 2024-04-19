@@ -1,9 +1,11 @@
-import { auth } from '@/firebase.config';
+import { auth } from '@/utils/firebase.config';
 import { useInput } from '@/hooks/use-input';
 import { alert } from '@/utils/helper';
 import { FirebaseError } from 'firebase/app';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useState } from 'react';
+import { fetchHelper } from '@/utils/fetch.helper';
+import { TRegisterPayload } from '@/utils/types/server.types';
 
 export const useRegister = () => {
   const [email, onEmailChange, setEmailError] = useInput();
@@ -40,14 +42,20 @@ export const useRegister = () => {
     if (!isValidated) return;
     try {
       setIsLoading(true);
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        email.value,
-        password.value
-      );
-    } catch (err: unknown) {
+      await createUserWithEmailAndPassword(auth, email.value, password.value);
+
+      // now creating and entry for user in the database
+      const response = await fetchHelper<any, TRegisterPayload>({
+        url: 'auth/register',
+        method: 'POST',
+        body: { email: email.value },
+      });
+
+      if (!response.ok) throw new Error(response.message);
+    } catch (err: any) {
+      console.log(err);
       if (err instanceof FirebaseError) return alert("Opp's", err.code);
-      alert("Opp's!", 'Something went wrong');
+      alert("Opp's!", err.message || 'Something went wrong');
     } finally {
       setIsLoading(false);
     }
