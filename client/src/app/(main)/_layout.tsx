@@ -1,5 +1,5 @@
 import { Slot } from 'expo-router';
-import { TabBar } from '@/components/tab-bar/tab-bar';
+import { TabBar } from '@/components/shared/tab-bar/tab-bar';
 import { View } from 'react-native';
 
 export default function MainLayout() {
