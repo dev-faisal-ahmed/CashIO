@@ -6,15 +6,16 @@ import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
 import { useRegister } from './_hooks/use-register';
+import { Loader } from '@/components/ui/loader';
 
 export default function Register() {
   const { states, handlers } = useRegister();
-  const { email, password, confirmPassword } = states;
+  const { email, password, confirmPassword, isLoading } = states;
 
   const {
-    onConfirmPasswordChange,
     onEmailChange,
     onPasswordChange,
+    onConfirmPasswordChange,
     handleRegister,
   } = handlers;
 
@@ -48,12 +49,16 @@ export default function Register() {
               secureTextEntry
               error={confirmPassword.error}
             />
-            <Button
-              onPress={handleRegister}
-              customClass="mx-auto w-[160px] mt-5"
-            >
-              <Text className="text-xl font-bold text-white">Register</Text>
-            </Button>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <Button
+                onPress={handleRegister}
+                customClass="mx-auto w-[160px] mt-5"
+              >
+                <Text className="text-xl font-bold text-white">Register</Text>
+              </Button>
+            )}
           </View>
           <View style={{ gap: 30 }} className="flex-row mt-8 items-center">
             <View
