@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 import { TUser } from './user.interface';
 
 const UserSchema = new Schema<TUser>({
-  name: { type: String, required: true },
+  name: { type: String, default: 'GUEST USER' },
   email: { type: String, required: true, unique: true },
   phone: { type: String },
   income: { type: Number, default: 0 },
