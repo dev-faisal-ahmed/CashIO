@@ -28,22 +28,25 @@ export default function Register() {
           </Text>
           <View style={{ gap: 16 }}>
             <Input
-              value={email}
+              value={email.value}
               onValueChange={onEmailChange}
               placeholder="Email"
               keyboardType="email-address"
+              error={email.error}
             />
             <Input
-              value={password}
+              value={password.value}
               onValueChange={onPasswordChange}
               placeholder="Password"
               secureTextEntry
+              error={password.error}
             />
             <Input
-              value={confirmPassword}
+              value={confirmPassword.value}
               onValueChange={onConfirmPasswordChange}
               placeholder="Password"
               secureTextEntry
+              error={confirmPassword.error}
             />
             <Button
               onPress={handleRegister}

@@ -1,6 +1,6 @@
 import { colors } from '@/themes/colors';
 import { getDimension } from '@/utils/helper';
-import { KeyboardTypeOptions, TextInput, View } from 'react-native';
+import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 
 type InputProps = {
   placeholder: string;
@@ -8,6 +8,7 @@ type InputProps = {
   secureTextEntry?: boolean;
   value: string;
   onValueChange: (value: string) => void;
+  error?: string;
 };
 
 const { width } = getDimension();
@@ -18,6 +19,7 @@ export function Input({
   secureTextEntry,
   value,
   onValueChange,
+  error,
 }: InputProps) {
   return (
     <View>
@@ -31,6 +33,7 @@ export function Input({
         value={value}
         onChangeText={onValueChange}
       />
+      {error && <Text className="text-error-500 ml-8 mt-2">{error}</Text>}
     </View>
   );
 }

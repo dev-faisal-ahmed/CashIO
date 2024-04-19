@@ -1,10 +1,14 @@
 import { useState } from 'react';
 
 export const useInput = () => {
-  const [input, setInput] = useState<string>('');
+  const [input, setInput] = useState({ value: '', error: '' });
+
   const onChange = (val: string) => {
-    setInput(val);
+    setInput((prev) => ({ ...prev, value: val }));
   };
 
-  return [input, onChange] as const;
+  const setError = (msg: string) => {
+    setInput((prev) => ({ ...prev, error: msg }));
+  };
+  return [input, onChange, setError] as const;
 };
