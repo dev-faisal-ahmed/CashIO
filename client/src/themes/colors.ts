@@ -11,4 +11,10 @@ export const colors = {
     800: '#23597d',
     900: '#1b445f',
   },
+  bg: {
+    dark: '#161a30',
+  },
+  card: {
+    bg: { dark: '#1B445F' },
+  },
 };
