@@ -1,9 +1,14 @@
 import { PropsWithChildren } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import {
+  GestureResponderEvent,
+  StyleProp,
+  TouchableOpacity,
+  ViewStyle,
+} from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 type ButtonProps = PropsWithChildren & {
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   customClass?: string;
   style?: StyleProp<ViewStyle>;
 };

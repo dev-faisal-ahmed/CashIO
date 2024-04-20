@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import { sendSuccessResponse } from '../../utils/response.helper';
-import { tryCatch } from '../../utils/try-catch';
 import { userServices } from './services/user.services';
+import { tryCatch } from '../../utils/try-catch';
 
 const registerUser = tryCatch(async (req, res) => {
   const newUser = await userServices.registerUser(req.body);
@@ -23,4 +23,14 @@ const loginUser = tryCatch(async (req, res) => {
   });
 });
 
-export const userController = { registerUser, loginUser };
+const updateProfile = tryCatch(async (req, res) => {
+  const updatedInfo = await userServices.updateProfile(req.user, req.body);
+
+  sendSuccessResponse(res, {
+    status: StatusCodes.OK,
+    message: 'User Profile Updated!',
+    data: updatedInfo,
+  });
+});
+
+export const userController = { registerUser, loginUser, updateProfile };

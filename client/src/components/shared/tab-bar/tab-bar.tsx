@@ -2,7 +2,7 @@ import {
   generateTabBarLinksLeft,
   generateTabBarLinksRight,
 } from './tab-bar-routes';
-import { Pressable, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Tab } from './tab';
 import { router, usePathname } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
@@ -18,7 +18,7 @@ export function TabBar() {
       ))}
 
       <TouchableOpacity
-        onPress={() => router.push('/register')}
+        onPress={() => router.push('/register/more-info')}
         style={{ borderRadius: 24 }}
         className="border-primary-500 border-2 h-16 w-16 flex items-center justify-center -mt-6"
       >
