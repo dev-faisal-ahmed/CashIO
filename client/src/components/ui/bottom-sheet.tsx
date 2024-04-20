@@ -1,4 +1,4 @@
-import { getDimension } from '@/utils/helper';
+import { getDimension } from '@/utils/helpers/ui.helper';
 import { PropsWithChildren } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 

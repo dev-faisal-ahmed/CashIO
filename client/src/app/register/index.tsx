@@ -45,7 +45,7 @@ export default function Register() {
             <Input
               value={confirmPassword.value}
               onValueChange={onConfirmPasswordChange}
-              placeholder="Password"
+              placeholder="Confirm Password"
               secureTextEntry
               error={confirmPassword.error}
             />

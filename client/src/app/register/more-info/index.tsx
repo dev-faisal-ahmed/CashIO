@@ -9,7 +9,7 @@ import { useMoreInfo } from './_hooks/use-more-info';
 import { Input } from '@/components/shared/input/input';
 import { BottomSheet } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';
-import { getDimension } from '@/utils/helper';
+import { getDimension } from '@/utils/helpers/ui.helper';
 import { Fontisto } from '@expo/vector-icons';
 import { Loader } from '@/components/ui/loader';
 
@@ -19,8 +19,13 @@ const options = ['BDT', 'DOLLAR', 'EURO', 'INR'];
 export default function MoreInfo() {
   const { state, handlers } = useMoreInfo();
   const { name, currency, openModal, isLoading } = state;
-  const { onNameChange, setOpenModal, onCurrencySelection, onProfileUpdate } =
-    handlers;
+  const {
+    onNameChange,
+    setOpenModal,
+    onCurrencySelection,
+    onProfileUpdate,
+    onShowCurrencyList,
+  } = handlers;
 
   return (
     <View className="px-6 flex-1 relative bg-bg-dark">
@@ -42,7 +47,7 @@ export default function MoreInfo() {
               error={name.error}
             />
             <TouchableOpacity
-              onPress={() => setOpenModal(true)}
+              onPress={onShowCurrencyList}
               style={{ width: width * 0.85 }}
               className="px-8 py-4 rounded-full text-white bg-card-bg-dark"
             >

@@ -1,15 +1,23 @@
+import { TUpdateProfilePayload } from '@/utils/types/server.types';
 import { useInput } from '@/hooks/use-input';
+import { fetchHelper } from '@/utils/helpers/fetch.helper';
 import { auth } from '@/utils/firebase.config';
-import { alert } from '@/utils/helper';
-import { FirebaseError } from 'firebase/app';
 import { updateProfile } from 'firebase/auth';
 import { useState } from 'react';
+import { router } from 'expo-router';
+import { toast } from '@/utils/helpers/toast.helper';
+import { Keyboard } from 'react-native';
 
 export const useMoreInfo = () => {
   const [name, onNameChange, setNameError] = useInput();
   const [currency, onCurrencyChange, setCurrencyError] = useInput();
   const [openModal, setOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const onShowCurrencyList = () => {
+    setOpenModal(true);
+    Keyboard.dismiss();
+  };
 
   const onProfileUpdate = async () => {
     // initially clearing all error
@@ -24,11 +32,23 @@ export const useMoreInfo = () => {
       setIsLoading(true);
 
       if (!auth.currentUser) throw new Error('No User Found');
-      const updatedUser = await updateProfile(auth.currentUser, {
+      await updateProfile(auth.currentUser, {
         displayName: name.value,
       });
+
+      // now updating users
+      const response = await fetchHelper<unknown, TUpdateProfilePayload>({
+        url: 'auth',
+        method: 'PATCH',
+        body: { name: name.value, currency: currency.value },
+      });
+
+      if (!response.ok) throw new Error(response.message);
+      toast.success(response.message);
+      router.push('/');
     } catch (err: any) {
-      alert('Error Occurred!', err.message);
+      console.log(err);
+      toast.error('Error Occurred!', err.message || 'something went wrong');
     } finally {
       setIsLoading(false);
     }
@@ -46,6 +66,7 @@ export const useMoreInfo = () => {
       setOpenModal,
       onProfileUpdate,
       onCurrencySelection,
+      onShowCurrencyList,
     },
   };
 };

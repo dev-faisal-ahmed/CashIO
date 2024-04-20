@@ -1,7 +1,6 @@
-import { Children } from 'react';
-import { SERVER_ADDRESS } from './config';
-import { getToken } from './helper';
-import { TServerResponse } from './types/server.types';
+import { SERVER_ADDRESS } from '../config';
+import { TServerResponse } from '../types/server.types';
+import { getToken } from './token.helper';
 
 type TMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 

@@ -1,5 +1,5 @@
 import { colors } from '@/themes/colors';
-import { getDimension } from '@/utils/helper';
+import { getDimension } from '@/utils/helpers/ui.helper';
 import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 
 type InputProps = {

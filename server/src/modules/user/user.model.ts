@@ -9,6 +9,7 @@ const UserSchema = new Schema<TUser>({
   expense: { type: Number, default: 0 },
   borrow: { type: Number, default: 0 },
   lend: { type: Number, default: 0 },
+  currency: { type: String, default: 'BTD' },
 });
 
 export const User = model('user', UserSchema);

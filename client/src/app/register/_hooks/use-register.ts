@@ -1,11 +1,12 @@
 import { auth } from '@/utils/firebase.config';
 import { useInput } from '@/hooks/use-input';
-import { alert } from '@/utils/helper';
-import { FirebaseError } from 'firebase/app';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
-import { fetchHelper } from '@/utils/fetch.helper';
+import { fetchHelper } from '@/utils/helpers/fetch.helper';
 import { TRegisterPayload } from '@/utils/types/server.types';
+import { setToken } from '@/utils/helpers/token.helper';
+import { router } from 'expo-router';
+import { toast } from '@/utils/helpers/toast.helper';
 
 export const useRegister = () => {
   const [email, onEmailChange, setEmailError] = useInput();
@@ -45,17 +46,20 @@ export const useRegister = () => {
       await createUserWithEmailAndPassword(auth, email.value, password.value);
 
       // now creating and entry for user in the database
-      const response = await fetchHelper<any, TRegisterPayload>({
+      const response = await fetchHelper<{ token: string }, TRegisterPayload>({
         url: 'auth/register',
         method: 'POST',
         body: { email: email.value },
       });
 
       if (!response.ok) throw new Error(response.message);
+
+      setToken(response.data?.token as string);
+      toast.success(response.message);
+      router.push('/register/more-info');
     } catch (err: any) {
       console.log(err);
-      if (err instanceof FirebaseError) return alert("Opp's", err.code);
-      alert("Opp's!", err.message || 'Something went wrong');
+      toast.error('Error Occurred!', err.message || 'something went wrong');
     } finally {
       setIsLoading(false);
     }

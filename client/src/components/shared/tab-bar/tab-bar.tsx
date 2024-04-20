@@ -18,7 +18,7 @@ export function TabBar() {
       ))}
 
       <TouchableOpacity
-        onPress={() => router.push('/register/more-info')}
+        onPress={() => router.push('/register')}
         style={{ borderRadius: 24 }}
         className="border-primary-500 border-2 h-16 w-16 flex items-center justify-center -mt-6"
       >

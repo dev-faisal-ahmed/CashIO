@@ -9,3 +9,8 @@ export type TServerResponse<TData> = {
 export type TRegisterPayload = {
   email: string;
 };
+
+export type TUpdateProfilePayload = {
+  name: string;
+  currency: string;
+};
