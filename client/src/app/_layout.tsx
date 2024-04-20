@@ -21,6 +21,7 @@ export default function RootLayout() {
           name="(main)"
           options={{ headerShown: false, animation: 'simple_push' }}
         />
+        <Stack.Screen name="login/index" options={{ headerShown: false }} />
         <Stack.Screen name="register/index" options={{ headerShown: false }} />
         <Stack.Screen
           name="register/more-info/index"

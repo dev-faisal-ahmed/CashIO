@@ -14,3 +14,8 @@ export type TUpdateProfilePayload = {
   name: string;
   currency: string;
 };
+
+export type TLoginPayload = {
+  email: string;
+  password: string;
+};

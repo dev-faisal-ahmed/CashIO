@@ -1,23 +1,16 @@
 import { GoogleLogin } from '@/components/shared/google-login/google.login';
-import { Input } from '@/components/shared/input/input';
-import { Button } from '@/components/ui/button';
-import { colors } from '@/themes/colors';
-import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
-import { useRegister } from './_hooks/use-register';
+import { useLogin } from './_hooks/use-login';
+import { Input } from '@/components/shared/input/input';
 import { Loader } from '@/components/ui/loader';
+import { Button } from '@/components/ui/button';
+import { Link } from 'expo-router';
 
-export default function Register() {
-  const { states, handlers } = useRegister();
-  const { email, password, confirmPassword, isLoading } = states;
-
-  const {
-    onEmailChange,
-    onPasswordChange,
-    onConfirmPasswordChange,
-    handleRegister,
-  } = handlers;
+export default function Login() {
+  const { states, handlers } = useLogin();
+  const { email, password, loading } = states;
+  const { handleLogin, onEmailChange, onPasswordChange } = handlers;
 
   return (
     <View className="px-6 flex-1 bg-bg-dark">
@@ -42,18 +35,12 @@ export default function Register() {
               secureTextEntry
               error={password.error}
             />
-            <Input
-              value={confirmPassword.value}
-              onValueChange={onConfirmPasswordChange}
-              placeholder="Confirm Password"
-              secureTextEntry
-              error={confirmPassword.error}
-            />
-            {isLoading ? (
+
+            {loading ? (
               <Loader />
             ) : (
               <Button
-                onPress={handleRegister}
+                onPress={handleLogin}
                 customClass="mx-auto w-[160px] mt-5"
               >
                 <Text className="text-xl font-bold text-white">Register</Text>
@@ -76,9 +63,9 @@ export default function Register() {
 
         <Link
           className="mb-8  text-center text-base text-primary-300 font-bold"
-          href={'/login'}
+          href={'/register'}
         >
-          Have an Account? LOGIN
+          New Here? Create an account
         </Link>
       </KeyboardAvoidingView>
     </View>
