@@ -1,11 +1,11 @@
 import { Slot } from 'expo-router';
-import { TabBar } from '@/components/tab-bar/tab-bar';
+import { TabBar } from '@/components/shared/tab-bar/tab-bar';
 import { View } from 'react-native';
 
 export default function MainLayout() {
   return (
-    <View className="h-screen flex justify-between pt-10 bg-primary-50">
-      <View className="px-5">
+    <View className="flex-1 justify-between bg-bg-dark">
+      <View className="px-6">
         <Slot />
       </View>
       <TabBar />

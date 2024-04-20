@@ -9,4 +9,5 @@ export type TUser = {
   income: number;
   borrow: number;
   lend: number;
+  currency: string;
 };

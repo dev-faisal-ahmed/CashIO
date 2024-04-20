@@ -1,0 +1,1 @@
+export const SERVER_ADDRESS = process.env.EXPO_PUBLIC_SERVER_ADDRESS;

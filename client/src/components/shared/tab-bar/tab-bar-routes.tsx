@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
 const generateIconColor = (url: string, activeUrl: string) => {
-  return url === activeUrl ? colors.primary[500] : 'black';
+  return url === activeUrl ? colors.primary[500] : 'white';
 };
 
 export const generateTabBarLinksLeft = (activeUrl: string) => {
