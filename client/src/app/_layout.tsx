@@ -1,11 +1,11 @@
 import { toastConfig } from '@/utils/helpers/toast.helper';
 import { Stack } from 'expo-router';
-import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
 export default function RootLayout() {
   return (
-    <View className="bg-bg-dark flex-1">
+    <SafeAreaView className="bg-bg-dark flex-1 pt-2">
       <Stack>
         <Stack.Screen
           name="(main)"
@@ -18,6 +18,6 @@ export default function RootLayout() {
         />
       </Stack>
       <Toast config={toastConfig} visibilityTime={2500} />
-    </View>
+    </SafeAreaView>
   );
 }

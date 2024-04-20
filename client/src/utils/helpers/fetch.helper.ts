@@ -20,7 +20,10 @@ export const fetchHelper = async <TData, TRequest>({
   console.log(`${SERVER_ADDRESS}/api/${url}`);
   const response = await fetch(`${SERVER_ADDRESS}/api/${url}`, {
     method: method,
-    headers: { 'Content-Type': 'application/json', Authorization: token },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token as string,
+    },
     body: JSON.stringify(body),
   });
 
