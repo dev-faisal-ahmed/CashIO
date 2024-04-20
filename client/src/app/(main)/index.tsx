@@ -1,17 +1,17 @@
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/store/auth';
+import { toast } from '@/utils/helpers/toast.helper';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 export default function Home() {
-  const showToast = () => {
-    Toast.show({
-      type: 'error',
-      text1: 'Error',
-      text2: 'Go to',
-      position: 'top',
-    });
+  const { auth, updateUser } = useAuth((state) => state);
+
+  const showToast = async () => {
+    toast.success(auth?.displayName!);
   };
+
   return (
     <View>
       <StatusBar style="light" />

@@ -1,4 +1,4 @@
-import { auth } from '@/utils/firebase.config';
+import { AUTH } from '@/utils/firebase.config';
 import { useInput } from '@/hooks/use-input';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
@@ -43,7 +43,7 @@ export const useRegister = () => {
     if (!isValidated) return;
     try {
       setIsLoading(true);
-      await createUserWithEmailAndPassword(auth, email.value, password.value);
+      await createUserWithEmailAndPassword(AUTH, email.value, password.value);
 
       // now creating and entry for user in the database
       const response = await fetchHelper<{ token: string }, TRegisterPayload>({

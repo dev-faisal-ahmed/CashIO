@@ -1,7 +1,7 @@
 import { TUpdateProfilePayload } from '@/utils/types/server.types';
 import { useInput } from '@/hooks/use-input';
 import { fetchHelper } from '@/utils/helpers/fetch.helper';
-import { auth } from '@/utils/firebase.config';
+import { AUTH } from '@/utils/firebase.config';
 import { updateProfile } from 'firebase/auth';
 import { useState } from 'react';
 import { router } from 'expo-router';
@@ -31,8 +31,8 @@ export const useMoreInfo = () => {
     try {
       setIsLoading(true);
 
-      if (!auth.currentUser) throw new Error('No User Found');
-      await updateProfile(auth.currentUser, {
+      if (!AUTH.currentUser) throw new Error('No User Found');
+      await updateProfile(AUTH.currentUser, {
         displayName: name.value,
       });
 
