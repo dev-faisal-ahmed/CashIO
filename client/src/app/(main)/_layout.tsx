@@ -1,4 +1,4 @@
-import { Slot } from 'expo-router';
+import { Slot, router } from 'expo-router';
 import { TabBar } from '@/components/shared/tab-bar/tab-bar';
 import { View } from 'react-native';
 
