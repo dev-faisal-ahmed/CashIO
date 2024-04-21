@@ -20,5 +20,11 @@ export const icons = {
 
   FontAwesome5: {
     'car-side': 'car-side',
+    mobile: 'mobile',
+    'cc-mastercard': 'cc-mastercard',
+  },
+  FontAwesome6: {
+    'headphones-simple': 'headphones-simple',
+    'umbrella-beach': 'umbrella-beach',
   },
 };

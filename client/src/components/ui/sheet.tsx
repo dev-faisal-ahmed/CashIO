@@ -1,6 +1,11 @@
 import { getDimension } from '@/utils/helpers/ui.helper';
 import { PropsWithChildren } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import {
+  TouchableHighlight,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 const { height, width } = getDimension();
@@ -23,15 +28,17 @@ export function Sheet({
       style={{ width, height: height }}
       className="absolute z-10 flex-1"
     >
-      <View
-        className={twMerge(
-          'p-6 bg-card-bg-dark rounded-3xl',
-          position === 'TOP' ? 'rounded-t-none' : '',
-          position === 'BOTTOM' ? 'mt-auto pb-12' : ''
-        )}
-      >
-        {children}
-      </View>
+      <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
+        <View
+          className={twMerge(
+            'p-6 bg-card-bg-dark rounded-3xl',
+            position === 'TOP' ? 'rounded-t-none' : '',
+            position === 'BOTTOM' ? 'mt-auto pb-12' : ''
+          )}
+        >
+          {children}
+        </View>
+      </TouchableWithoutFeedback>
     </TouchableOpacity>
   ) : null;
 }

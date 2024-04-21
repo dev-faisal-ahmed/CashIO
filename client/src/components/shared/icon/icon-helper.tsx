@@ -5,11 +5,11 @@ import {
   Ionicons,
   Entypo,
   FontAwesome5,
+  FontAwesome6,
 } from '@expo/vector-icons';
 import { icons } from './icons';
 
 // type of all icons group
-export type TIconGroup = keyof typeof icons;
 
 type TFontAwesomeName = keyof typeof icons.FontAwesome;
 type TMaterialCommunityIconsName = keyof typeof icons.MaterialCommunityIcons;
@@ -17,6 +17,7 @@ type TEntypoName = keyof typeof icons.Entypo;
 type TMaterialIconsName = keyof typeof icons.MaterialIcons;
 type TIoniconsName = keyof typeof icons.Ionicons;
 type TFontAwesome5Name = keyof typeof icons.FontAwesome5;
+type FontAwesome6Name = keyof typeof icons.FontAwesome6;
 
 export type TIconName =
   | TFontAwesomeName
@@ -24,7 +25,15 @@ export type TIconName =
   | TEntypoName
   | TMaterialIconsName
   | TIoniconsName
-  | TFontAwesome5Name;
+  | TFontAwesome5Name
+  | FontAwesome6Name;
+
+export type TIconGroup = keyof typeof icons;
+
+export type TIconType = {
+  group: TIconGroup;
+  name: TIconName;
+};
 
 type TGetIcon = {
   size?: number;
@@ -65,6 +74,9 @@ export const getIcon = ({ size = 24, color = 'white', name }: TGetIcon) => {
         size={size}
         color={color}
       />
+    ),
+    FontAwesome6: (
+      <FontAwesome6 name={name as FontAwesome6Name} size={size} color={color} />
     ),
   };
 };
