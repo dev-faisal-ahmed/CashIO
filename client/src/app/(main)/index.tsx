@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/hooks/use-auth';
 import { toast } from '@/utils/helpers/toast.helper';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
@@ -7,9 +6,7 @@ import { signOut } from 'firebase/auth';
 import { AUTH } from '@/utils/firebase.config';
 
 export default function Home() {
-  const { auth } = useAuth();
   const handleLogout = async () => {
-    toast.success(auth?.displayName!);
     await signOut(AUTH);
     toast.success('Logout Done!');
   };
