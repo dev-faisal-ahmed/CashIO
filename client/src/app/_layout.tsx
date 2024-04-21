@@ -8,11 +8,11 @@ import Toast from 'react-native-toast-message';
 export default function RootLayout() {
   const { auth } = useAuth();
   const segment = useSegments();
-  console.log(segment);
 
   useEffect(() => {
-    console.log(auth);
     if (!auth && segment[0] === '(main)') router.replace('/login');
+    else if ((auth && segment[0] === 'login') || segment[0] === 'register')
+      router.replace('/');
   }, [auth]);
 
   return (

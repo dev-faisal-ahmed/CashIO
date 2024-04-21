@@ -43,7 +43,7 @@ export default function Login() {
                 onPress={handleLogin}
                 customClass="mx-auto w-[160px] mt-5"
               >
-                <Text className="text-xl font-bold text-white">Register</Text>
+                <Text className="text-xl font-bold text-white">Login</Text>
               </Button>
             )}
           </View>
