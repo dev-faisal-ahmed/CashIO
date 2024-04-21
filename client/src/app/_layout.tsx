@@ -5,7 +5,7 @@ import Toast from 'react-native-toast-message';
 
 export default function RootLayout() {
   return (
-    <SafeAreaView className="bg-bg-dark flex-1 pt-2">
+    <SafeAreaView className="bg-bg-dark flex-1 pt-4">
       <Stack>
         <Stack.Screen
           name="(main)"
