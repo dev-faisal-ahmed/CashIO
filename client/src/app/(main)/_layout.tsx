@@ -2,13 +2,10 @@ import { Redirect, Slot } from 'expo-router';
 import { TabBar } from '@/components/shared/tab-bar/tab-bar';
 import { View } from 'react-native';
 import { Loader } from '@/components/ui/loader';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { AUTH } from '@/utils/firebase.config';
+import { useGetAuth } from '@/hooks/use-get-auth';
 
 export default function MainLayout() {
-  const [auth, isLoading] = useAuthState(AUTH);
-
-  if (!auth) return <Redirect href={'/login'} />;
+  const { auth, isLoading } = useGetAuth();
 
   if (isLoading)
     return (
@@ -16,6 +13,8 @@ export default function MainLayout() {
         <Loader />
       </View>
     );
+
+  if (!auth) return <Redirect href={'/login'} />;
 
   return (
     <View className="flex-1 justify-between bg-bg-dark">

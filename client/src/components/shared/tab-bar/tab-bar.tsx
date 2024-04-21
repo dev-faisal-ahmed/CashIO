@@ -2,7 +2,7 @@ import {
   generateTabBarLinksLeft,
   generateTabBarLinksRight,
 } from './tab-bar-routes';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableWithoutFeedback, View } from 'react-native';
 import { Tab } from './tab';
 import { router, usePathname } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
@@ -17,13 +17,13 @@ export function TabBar() {
         <Tab key={link.url} {...link} />
       ))}
 
-      <TouchableOpacity
-        onPress={() => router.push('login')}
+      <TouchableWithoutFeedback
+        onPress={() => router.push('/')}
         style={{ borderRadius: 24 }}
         className="border-primary-500 border-2 h-16 w-16 flex items-center justify-center -mt-6"
       >
         <AntDesign name="plus" size={30} color={colors.primary[500]} />
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
 
       {generateTabBarLinksRight(path).map((link) => (
         <Tab key={link.url} {...link} />
