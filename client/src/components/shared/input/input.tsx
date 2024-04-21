@@ -1,5 +1,4 @@
 import { colors } from '@/themes/colors';
-import { getDimension } from '@/utils/helpers/ui.helper';
 import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 
 type InputProps = {
@@ -10,8 +9,6 @@ type InputProps = {
   onValueChange: (value: string) => void;
   error?: string;
 };
-
-const { width } = getDimension();
 
 export function Input({
   placeholder,
@@ -25,7 +22,7 @@ export function Input({
     <View>
       <TextInput
         placeholderTextColor={'white'}
-        style={{ width: width * 0.85, backgroundColor: colors.card.bg.dark }}
+        style={{ backgroundColor: colors.card.bg.dark }}
         className="text-lg px-8 py-4 rounded-full text-white"
         placeholder={placeholder}
         keyboardType={keyboardType}

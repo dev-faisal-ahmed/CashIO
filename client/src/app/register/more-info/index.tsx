@@ -7,7 +7,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { useMoreInfo } from './use-more-info';
 import { Input } from '@/components/shared/input/input';
-import { BottomSheet } from '@/components/ui/bottom-sheet';
+import { Sheet } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { getDimension } from '@/utils/helpers/ui.helper';
 import { Fontisto } from '@expo/vector-icons';
@@ -72,7 +72,7 @@ export default function MoreInfo() {
       </KeyboardAvoidingView>
 
       {/* bottom sheets */}
-      <BottomSheet isOpen={openModal} close={() => setOpenModal(false)}>
+      <Sheet isOpen={openModal} close={() => setOpenModal(false)}>
         <View className="space-y-3">
           {options.map((option) => (
             <TouchableOpacity
@@ -90,7 +90,7 @@ export default function MoreInfo() {
             </TouchableOpacity>
           ))}
         </View>
-      </BottomSheet>
+      </Sheet>
     </View>
   );
 }
