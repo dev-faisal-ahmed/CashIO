@@ -18,8 +18,12 @@ export function TabBar() {
       ))}
 
       <TouchableOpacity
-        onPress={() => router.push('login')}
-        style={{ borderRadius: 24 }}
+        onPress={() => router.push('/')}
+        style={{
+          borderRadius: 24,
+          borderColor: colors.primary[500],
+          borderWidth: 8,
+        }}
         className="border-primary-500 border-2 h-16 w-16 flex items-center justify-center -mt-6"
       >
         <AntDesign name="plus" size={30} color={colors.primary[500]} />

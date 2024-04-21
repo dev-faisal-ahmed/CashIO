@@ -5,7 +5,7 @@ import { colors } from '@/themes/colors';
 import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
-import { useRegister } from './_hooks/use-register';
+import { useRegister } from './use-register';
 import { Loader } from '@/components/ui/loader';
 
 export default function Register() {

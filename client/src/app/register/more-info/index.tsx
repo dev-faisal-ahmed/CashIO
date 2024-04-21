@@ -5,7 +5,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useMoreInfo } from './_hooks/use-more-info';
+import { useMoreInfo } from './use-more-info';
 import { Input } from '@/components/shared/input/input';
 import { BottomSheet } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';

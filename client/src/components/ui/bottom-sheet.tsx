@@ -13,10 +13,10 @@ export function BottomSheet({ isOpen, close, children }: BottomSheetProps) {
   return isOpen ? (
     <TouchableOpacity
       onPress={close}
-      style={{ height, width }}
+      style={{ width, height: height }}
       className="absolute z-10 flex-1"
     >
-      <View className="mt-auto p-6 bg-card-bg-dark rounded-3xl">
+      <View className="mt-auto p-6 bg-card-bg-dark rounded-3xl pb-12">
         {children}
       </View>
     </TouchableOpacity>

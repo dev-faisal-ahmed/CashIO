@@ -1,7 +1,7 @@
 import { GoogleLogin } from '@/components/shared/google-login/google.login';
 import { StatusBar } from 'expo-status-bar';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
-import { useLogin } from './_hooks/use-login';
+import { useLogin } from './use-login';
 import { Input } from '@/components/shared/input/input';
 import { Loader } from '@/components/ui/loader';
 import { Button } from '@/components/ui/button';
@@ -43,7 +43,7 @@ export default function Login() {
                 onPress={handleLogin}
                 customClass="mx-auto w-[160px] mt-5"
               >
-                <Text className="text-xl font-bold text-white">Register</Text>
+                <Text className="text-xl font-bold text-white">Login</Text>
               </Button>
             )}
           </View>

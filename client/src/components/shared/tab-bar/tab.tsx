@@ -1,7 +1,7 @@
 import { colors } from '@/themes/colors';
 import { router } from 'expo-router';
 import { ReactNode } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 type TabProps = {
@@ -13,7 +13,7 @@ type TabProps = {
 
 export function Tab({ title, icon, url, activeUrl }: TabProps) {
   return (
-    <TouchableOpacity onPress={() => router.push(url)}>
+    <TouchableWithoutFeedback onPress={() => router.push(url)}>
       <View className="items-center">
         <View
           style={{
@@ -33,6 +33,6 @@ export function Tab({ title, icon, url, activeUrl }: TabProps) {
           {title}
         </Text>
       </View>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   );
 }
