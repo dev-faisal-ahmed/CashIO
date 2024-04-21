@@ -5,6 +5,7 @@ import { useAddWallet } from './use-add-wallet';
 import { CheckBox } from '@/components/shared/input/check-box';
 import { Button } from '@/components/ui/button';
 import { AntDesign } from '@expo/vector-icons';
+import { IconPicker } from '@/components/shared/icon/icon-picker';
 
 type AddWalletProps = {
   showWalletModal: boolean;
@@ -23,9 +24,11 @@ export function AddWallet({
     <Modal animationType="slide" visible={showWalletModal}>
       <View className="bg-bg-dark flex-1 pt-4 px-6">
         <CloseModal onCloseModal={onCloseWalletModal} />
-        <Text className="text-white mt-8">Set Wallet Icon</Text>
-        <View></View>
-        <View style={{ gap: 16 }} className="mt-4">
+        <Text className="text-white text-lg mt-8 mb-6 text-center">
+          Set Wallet Icon
+        </Text>
+        <IconPicker />
+        <View style={{ gap: 16 }} className="mt-12">
           <Input
             placeholder="Name"
             value={name.value}

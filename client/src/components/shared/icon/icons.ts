@@ -7,7 +7,7 @@ export const icons = {
     'bus-school': 'bus-school',
   },
 
-  Ionicons: { school: 'school' },
+  Ionicons: { school: 'school', card: 'card' },
 
   Entypo: {
     rocket: 'rocket',
