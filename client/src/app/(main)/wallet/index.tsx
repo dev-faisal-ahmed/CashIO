@@ -51,7 +51,7 @@ export default function Wallet() {
         numColumns={4}
         renderItem={(eachData) => <WalletContainer {...eachData.item} />}
         keyExtractor={(eachData) => eachData._id}
-        columnWrapperStyle={{ gap: 20, justifyContent: 'space-around' }}
+        columnWrapperStyle={{ gap: 20, justifyContent: 'center' }}
       />
       {/* add wallet */}
       <View className="items-center absolute bottom-4 right-0">
