@@ -23,8 +23,8 @@ export default function Register() {
     <View className="px-6 flex-1 bg-bg-dark">
       <StatusBar style="light" />
       <KeyboardAvoidingView behavior="height" className="flex-1">
-        <View className="flex-1 items-center justify-center">
-          <Text className="text-4xl font-bold text-primary-500 mb-8">
+        <View className="flex-1 justify-center">
+          <Text className="text-4xl font-bold text-primary-500 mb-8 text-center">
             Cash-IO
           </Text>
           <View style={{ gap: 16 }}>

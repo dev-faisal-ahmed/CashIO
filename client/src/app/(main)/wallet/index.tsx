@@ -1,24 +1,31 @@
 import { ProfileIcon } from '@/components/shared/profile-icon/profile-icon';
 import { Loader } from '@/components/ui/loader';
 import { useGetAuth } from '@/hooks/use-get-auth';
-import { ScrollView, Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button } from '@/components/ui/button';
 import { Entypo } from '@expo/vector-icons';
 import { colors } from '@/themes/colors';
 import { getDimension } from '@/utils/helpers/ui.helper';
 import { AddWallet } from './_components/add-wallet/add-wallet';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useWalletServices } from '@/store/use-wallet-services';
+import { WalletContainer } from './_components/wallet-container/wallet-container';
 
 const { height } = getDimension();
 
 export default function Wallet() {
   const { auth, isLoading } = useGetAuth();
   const [showWalletModal, setShowWalletModal] = useState(false);
+  const { wallets, fetch, loading } = useWalletServices((state) => state);
 
-  if (isLoading)
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  if (isLoading || loading)
     return (
-      <View className="flex-1">
+      <View className="flex-1 mt-20">
         <Loader />
       </View>
     );
@@ -33,9 +40,17 @@ export default function Wallet() {
           color="white"
         />
       </View>
-      <ScrollView className="mt-6" showsVerticalScrollIndicator={false}>
-        <Text className="text-white text-center text-2xl">Wallets</Text>
-      </ScrollView>
+      <Text className="text-white text-center text-2xl my-6">Wallets</Text>
+      {/* wallets list */}
+      <FlatList
+        horizontal={false}
+        data={wallets}
+        numColumns={4}
+        renderItem={(eachData) => <WalletContainer {...eachData.item} />}
+        keyExtractor={(eachData) => eachData._id}
+        columnWrapperStyle={{ gap: 24 }}
+      />
+      {/* add wallet */}
       <View className="items-center absolute bottom-4 right-0">
         <Button
           onPress={() => setShowWalletModal(true)}

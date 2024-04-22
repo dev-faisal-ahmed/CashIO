@@ -1,3 +1,5 @@
+import { TIcon } from '@/components/shared/icon/icon-helper';
+
 export type TServerResponse<TData> = {
   status: number;
   message: string;
@@ -18,4 +20,11 @@ export type TUpdateProfilePayload = {
 export type TLoginPayload = {
   email: string;
   password: string;
+};
+
+export type TAddWalletPayload = {
+  name: string;
+  initialBalance: number;
+  icon: TIcon;
+  saving: boolean;
 };

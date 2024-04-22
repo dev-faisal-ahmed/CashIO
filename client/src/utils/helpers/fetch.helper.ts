@@ -17,7 +17,6 @@ export const fetchHelper = async <TData, TRequest>({
 }: TFetchHelper<TRequest>) => {
   const token = await getToken();
 
-  console.log(`${SERVER_ADDRESS}/api/${url}`);
   const response = await fetch(`${SERVER_ADDRESS}/api/${url}`, {
     method: method,
     headers: {

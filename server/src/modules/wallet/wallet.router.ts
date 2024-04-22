@@ -12,3 +12,5 @@ walletRouter.post(
   validationHandler(walletValidation.CreateWallet),
   walletController.createWallet
 );
+
+walletRouter.get('/', authGuard, walletController.getWallets);
