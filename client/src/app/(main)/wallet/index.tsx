@@ -25,12 +25,10 @@ export default function Wallet() {
 
   if (isLoading || loading)
     return (
-      <View className="flex-1">
+      <View className="flex-1 mt-20">
         <Loader />
       </View>
     );
-
-  console.log(wallets);
 
   return (
     <View style={{ height: height - 120 }} className="relative">
@@ -46,12 +44,11 @@ export default function Wallet() {
       {/* wallets list */}
       <FlatList
         horizontal={false}
-        className=""
         data={wallets}
         numColumns={4}
         renderItem={(eachData) => <WalletContainer {...eachData.item} />}
         keyExtractor={(eachData) => eachData._id}
-        columnWrapperStyle={{ gap: 20, justifyContent: 'center' }}
+        columnWrapperStyle={{ gap: 24 }}
       />
       {/* add wallet */}
       <View className="items-center absolute bottom-4 right-0">
