@@ -1,7 +1,7 @@
 import { ProfileIcon } from '@/components/shared/profile-icon/profile-icon';
 import { Loader } from '@/components/ui/loader';
 import { useGetAuth } from '@/hooks/use-get-auth';
-import { Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button } from '@/components/ui/button';
 import { Entypo } from '@expo/vector-icons';
@@ -10,6 +10,7 @@ import { getDimension } from '@/utils/helpers/ui.helper';
 import { AddWallet } from './_components/add-wallet/add-wallet';
 import { useEffect, useState } from 'react';
 import { useWalletServices } from '@/store/use-wallet-services';
+import { WalletContainer } from './_components/wallet-container/wallet-container';
 
 const { height } = getDimension();
 
@@ -41,7 +42,18 @@ export default function Wallet() {
           color="white"
         />
       </View>
-      <Text className="text-white text-center text-2xl">Wallets</Text>
+      <Text className="text-white text-center text-2xl my-6">Wallets</Text>
+      {/* wallets list */}
+      <FlatList
+        horizontal={false}
+        className=""
+        data={wallets}
+        numColumns={4}
+        renderItem={(eachData) => <WalletContainer {...eachData.item} />}
+        keyExtractor={(eachData) => eachData._id}
+        columnWrapperStyle={{ gap: 20, justifyContent: 'space-around' }}
+      />
+      {/* add wallet */}
       <View className="items-center absolute bottom-4 right-0">
         <Button
           onPress={() => setShowWalletModal(true)}
