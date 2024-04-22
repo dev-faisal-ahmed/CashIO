@@ -1,11 +1,6 @@
 import { getDimension } from '@/utils/helpers/ui.helper';
 import { PropsWithChildren } from 'react';
-import {
-  TouchableHighlight,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 const { height, width } = getDimension();
@@ -25,7 +20,7 @@ export function Sheet({
   return isOpen ? (
     <TouchableOpacity
       onPress={close}
-      style={{ width, height: height }}
+      style={{ width, height }}
       className="absolute z-10 flex-1"
     >
       <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>

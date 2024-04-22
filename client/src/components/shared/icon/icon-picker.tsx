@@ -5,11 +5,12 @@ import {
   View,
 } from 'react-native';
 import { useState } from 'react';
-
 import { AntDesign } from '@expo/vector-icons';
 import { Sheet } from '@/components/ui/sheet';
 import { TIconGroup, TIconName, TIcon, getIcon } from './icon-helper';
 import { icons } from './icons';
+import { useKeyboard } from '@/hooks/use-keyboard';
+import { twMerge } from 'tailwind-merge';
 
 type TIcons = Record<string, Record<string, string>>;
 const iconsArray = Object.keys(icons).reduce(
@@ -32,6 +33,7 @@ type IconPickerProps = {
 
 export function IconPicker({ icon, updateIcon }: IconPickerProps) {
   const [open, setOpen] = useState(false);
+  const { keyboardShown } = useKeyboard();
 
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
@@ -45,10 +47,19 @@ export function IconPicker({ icon, updateIcon }: IconPickerProps) {
     <>
       <TouchableOpacity
         onPress={handleOpen}
-        className="items-center h-52 w-52 justify-center bg-card-bg-dark rounded-full mx-auto"
+        className={twMerge(
+          'items-center  justify-center bg-card-bg-dark rounded-full mx-auto',
+          keyboardShown ? 'w-28 h-28' : 'h-52 w-52'
+        )}
       >
         {icon ? (
-          <>{getIcon({ name: icon.name, size: 100 })[icon.group]}</>
+          <>
+            {
+              getIcon({ name: icon.name, size: keyboardShown ? 50 : 100 })[
+                icon.group
+              ]
+            }
+          </>
         ) : (
           <AntDesign name="plus" size={40} color="white" />
         )}
