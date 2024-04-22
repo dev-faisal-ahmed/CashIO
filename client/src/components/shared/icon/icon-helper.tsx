@@ -30,7 +30,7 @@ export type TIconName =
 
 export type TIconGroup = keyof typeof icons;
 
-export type TIconType = {
+export type TIcon = {
   group: TIconGroup;
   name: TIconName;
 };

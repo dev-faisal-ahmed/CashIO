@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 const CreateWallet = z.object({
   name: z.string({ required_error: 'Wallet Name is required' }),
+  initialBalance: z.number().min(0).optional(),
   icon: z.object(
     {
       group: z.string({ required_error: 'Icon Group is required' }),

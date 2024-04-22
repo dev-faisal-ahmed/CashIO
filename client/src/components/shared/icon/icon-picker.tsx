@@ -4,38 +4,14 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {
-  Dispatch,
-  PropsWithChildren,
-  SetStateAction,
-  createContext,
-  useContext,
-  useState,
-} from 'react';
+import { useState } from 'react';
 
 import { AntDesign } from '@expo/vector-icons';
 import { Sheet } from '@/components/ui/sheet';
-import { TIconGroup, TIconName, TIconType, getIcon } from './icon-helper';
+import { TIconGroup, TIconName, TIcon, getIcon } from './icon-helper';
 import { icons } from './icons';
 
-// icon picker context
-export const IconPickerContext = createContext<{
-  icon: TIconType | undefined;
-  setIcon: Dispatch<SetStateAction<TIconType | undefined>>;
-} | null>(null);
-
-export function IconPickerProvider({ children }: PropsWithChildren) {
-  const [icon, setIcon] = useState<TIconType>();
-
-  return (
-    <IconPickerContext.Provider value={{ icon, setIcon }}>
-      {children}
-    </IconPickerContext.Provider>
-  );
-}
-
 type TIcons = Record<string, Record<string, string>>;
-
 const iconsArray = Object.keys(icons).reduce(
   (acc: { group: string; name: string }[], iconGroup) => {
     const iconGroupArray = Object.keys((icons as TIcons)[iconGroup]).map(
@@ -49,16 +25,19 @@ const iconsArray = Object.keys(icons).reduce(
   []
 );
 
-function IconPickerComponent() {
-  const iconPickerContext = useContext(IconPickerContext);
+type IconPickerProps = {
+  icon: TIcon | undefined;
+  updateIcon: (payload: TIcon) => void;
+};
+
+export function IconPicker({ icon, updateIcon }: IconPickerProps) {
   const [open, setOpen] = useState(false);
-  const { icon, setIcon } = iconPickerContext!;
 
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
 
-  const updateIcon = (payload: TIconType) => {
-    setIcon(payload);
+  const onIconChange = (payload: TIcon) => {
+    updateIcon(payload);
     handleClose();
   };
 
@@ -66,7 +45,7 @@ function IconPickerComponent() {
     <>
       <TouchableOpacity
         onPress={handleOpen}
-        className="items-center h-52 w-52 justify-center bg-card-bg-dark/40 rounded-full mx-auto"
+        className="items-center h-52 w-52 justify-center bg-card-bg-dark rounded-full mx-auto"
       >
         {icon ? (
           <>{getIcon({ name: icon.name, size: 100 })[icon.group]}</>
@@ -82,7 +61,7 @@ function IconPickerComponent() {
           renderItem={(eachData) => (
             <TouchableWithoutFeedback
               onPress={() =>
-                updateIcon({
+                onIconChange({
                   group: eachData.item.group as TIconGroup,
                   name: eachData.item.name as TIconName,
                 })
@@ -101,13 +80,5 @@ function IconPickerComponent() {
         />
       </Sheet>
     </>
-  );
-}
-
-export function IconPicker() {
-  return (
-    <IconPickerProvider>
-      <IconPickerComponent />
-    </IconPickerProvider>
   );
 }
