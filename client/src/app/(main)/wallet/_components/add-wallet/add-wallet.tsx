@@ -33,7 +33,7 @@ export function AddWallet({ showModal, onCloseModal }: AddWalletProps) {
             Set Wallet Icon
           </Text>
           <IconPicker icon={icon} updateIcon={updateIcon} />
-          <View style={{ gap: 16 }} className="mt-12">
+          <View style={{ gap: 24 }} className="mt-12">
             <Input
               placeholder="Name"
               value={name.value}

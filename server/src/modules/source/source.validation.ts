@@ -3,7 +3,7 @@ import { sourceTypes } from './source.constants';
 
 const CreateSources = z.object({
   name: z.string({ required_error: 'Name is required' }),
-  sourceType: z.enum([...(sourceTypes as [string, ...string[]])], {
+  type: z.enum([...(sourceTypes as [string, ...string[]])], {
     required_error: 'Source type is required',
   }),
   budget: z.number({}).optional(),

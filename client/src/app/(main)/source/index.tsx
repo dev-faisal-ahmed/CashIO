@@ -2,20 +2,24 @@ import { ScreenHeader } from '@/components/shared/screen-header/screen-header';
 import { Loader } from '@/components/ui/loader';
 import { useGetAuth } from '@/hooks/use-get-auth';
 import { getDimension } from '@/utils/helpers/ui.helper';
-import { useState } from 'react';
+import { Children, useState } from 'react';
 import { Text, View } from 'react-native';
 import { AddSource } from './_components/add-source/add-source';
 import { Button } from '@/components/ui/button';
 import { colors } from '@/themes/colors';
 import { Entypo } from '@expo/vector-icons';
+import { useSourceServices } from '@/store/use-source-services';
 
 const { height } = getDimension();
 
 export default function Source() {
   const { auth, isLoading } = useGetAuth();
   const [showSourceModal, setShowSourceModal] = useState(false);
+  const { sources, loading } = useSourceServices();
 
-  if (isLoading)
+  console.log(sources);
+
+  if (isLoading || loading)
     return (
       <View className="flex-1 mt-20">
         <Loader />
