@@ -13,4 +13,14 @@ const createSource = tryCatch(async (req, res) => {
   });
 });
 
-export const sourceController = { createSource };
+const getSource = tryCatch(async (req, res) => {
+  const sources = await sourceServices.getSource(req.user);
+
+  sendSuccessResponse(res, {
+    status: StatusCodes.OK,
+    message: 'Sources Retrieved Successfully',
+    data: sources,
+  });
+});
+
+export const sourceController = { createSource, getSource };

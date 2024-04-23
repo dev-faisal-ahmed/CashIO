@@ -1,6 +1,7 @@
 import { Schema } from 'mongoose';
+import { TIcon } from '../../utils/global-types';
 
-export type TSourceType = 'INCOME' | 'EXPENSE';
+export type TSourceType = 'INCOME' | 'EXPENSE' | 'BOTH';
 
 export type TSource = {
   _id: Schema.Types.ObjectId;
@@ -9,5 +10,5 @@ export type TSource = {
   amount: number;
   budget: number;
   type: TSourceType;
-  icon: string;
+  icon: TIcon;
 };

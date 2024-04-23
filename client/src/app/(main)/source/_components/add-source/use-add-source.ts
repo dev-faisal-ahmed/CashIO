@@ -1,5 +1,6 @@
 import { TIcon } from '@/components/shared/icon/icon-helper';
 import { useInput } from '@/hooks/use-input';
+import { TSourceType } from '@/utils/types/data.types';
 import { useState } from 'react';
 
 type TUseAddSource = {
@@ -9,21 +10,12 @@ type TUseAddSource = {
 export const useAddSource = ({ onCloseModal }: TUseAddSource) => {
   const [name, onNameChange, setNameError] = useInput();
   const [budget, onBudgetChange, setBudgetError] = useInput();
-
   const [icon, setIcon] = useState<TIcon>();
-  const [isBudgetEnabled, setBudgetEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  // const [isSavingWallet, setIsSavingWallet] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const { refetch } = useWalletServices((state) => state);
+  const [type, setType] = useState<TSourceType>('EXPENSE');
 
   const updateIcon = (payload: TIcon) => {
     setIcon(payload);
-  };
-
-  const budgetToggle = () => {
-    setBudgetEnabled((prev) => !prev);
   };
 
   const onAddSource = () => {
@@ -31,13 +23,13 @@ export const useAddSource = ({ onCloseModal }: TUseAddSource) => {
   };
 
   return {
-    states: { name, icon, isBudgetEnabled, budget, loading },
+    states: { name, icon, budget, loading, type },
     handlers: {
       onNameChange,
       updateIcon,
-      budgetToggle,
       onBudgetChange,
       onAddSource,
+      setType,
     },
   };
 

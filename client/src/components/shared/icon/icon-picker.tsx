@@ -1,9 +1,4 @@
-import {
-  FlatList,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { Sheet } from '@/components/ui/sheet';
@@ -11,6 +6,7 @@ import { TIconGroup, TIconName, TIcon, getIcon } from './icon-helper';
 import { icons } from './icons';
 import { useKeyboard } from '@/hooks/use-keyboard';
 import { twMerge } from 'tailwind-merge';
+import { getDimension } from '@/utils/helpers/ui.helper';
 
 type TIcons = Record<string, Record<string, string>>;
 const iconsArray = Object.keys(icons).reduce(
@@ -31,6 +27,9 @@ type IconPickerProps = {
   updateIcon: (payload: TIcon) => void;
 };
 
+const { width } = getDimension();
+const iconContainerWidth = (width - 32 - 64 - 48) / 5;
+
 export function IconPicker({ icon, updateIcon }: IconPickerProps) {
   const [open, setOpen] = useState(false);
   const { keyboardShown } = useKeyboard();
@@ -49,7 +48,8 @@ export function IconPicker({ icon, updateIcon }: IconPickerProps) {
         onPress={handleOpen}
         className={twMerge(
           'items-center  justify-center bg-card-bg-dark rounded-full mx-auto',
-          keyboardShown ? 'w-28 h-28' : 'h-52 w-52'
+          keyboardShown ? 'w-28 h-28' : 'h-52 w-52',
+          open ? 'bg-card-bg-dark/60' : ''
         )}
       >
         {icon ? (
@@ -64,31 +64,36 @@ export function IconPicker({ icon, updateIcon }: IconPickerProps) {
           <AntDesign name="plus" size={40} color="white" />
         )}
       </TouchableOpacity>
-      <Sheet padding={16} isOpen={open} close={handleClose} position="TOP">
-        <FlatList
-          data={iconsArray}
-          numColumns={4}
-          contentContainerStyle={{ gap: 10 }}
-          renderItem={(eachData) => (
+      <Sheet
+        style={{ padding: 16 }}
+        isOpen={open}
+        close={handleClose}
+        position="TOP"
+        sheetWidth={width - 48}
+      >
+        <View style={{ gap: 16 }} className="flex-row flex-wrap">
+          {iconsArray.map((icon) => (
             <TouchableWithoutFeedback
               onPress={() =>
                 onIconChange({
-                  group: eachData.item.group as TIconGroup,
-                  name: eachData.item.name as TIconName,
+                  group: icon.group as TIconGroup,
+                  name: icon.name as TIconName,
                 })
               }
             >
-              <View className="flex-1 items-center justify-center bg-bg-dark/60 mx-3 p-2 rounded-xl">
+              <View
+                style={{ width: iconContainerWidth }}
+                className="items-center justify-center bg-bg-dark/60 p-2 rounded-xl"
+              >
                 {
-                  getIcon({ name: eachData.item.name as TIconName })[
-                    eachData.item.group as TIconGroup
+                  getIcon({ name: icon.name as TIconName, size: 20 })[
+                    icon.group as TIconGroup
                   ]
                 }
               </View>
             </TouchableWithoutFeedback>
-          )}
-          keyExtractor={(eachData) => `${eachData.name}-${eachData.group}`}
-        />
+          ))}
+        </View>
       </Sheet>
     </>
   );

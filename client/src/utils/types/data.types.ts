@@ -8,3 +8,14 @@ export type TWallet = {
   saving: boolean;
   icon: TIcon;
 };
+
+export type TSourceType = 'INCOME' | 'EXPENSE' | 'BOTH';
+export type TSource = {
+  _id: string;
+  userId: string;
+  name: string;
+  amount: number;
+  budget: number;
+  type: TSourceType;
+  icon: TIcon;
+};
