@@ -80,6 +80,7 @@ export function IconPicker({ icon, updateIcon }: IconPickerProps) {
                   name: icon.name as TIconName,
                 })
               }
+              key={`${icon.group}:${icon.name}`}
             >
               <View
                 style={{ width: iconContainerWidth }}

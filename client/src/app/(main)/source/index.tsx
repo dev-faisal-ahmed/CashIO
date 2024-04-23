@@ -2,22 +2,25 @@ import { ScreenHeader } from '@/components/shared/screen-header/screen-header';
 import { Loader } from '@/components/ui/loader';
 import { useGetAuth } from '@/hooks/use-get-auth';
 import { getDimension } from '@/utils/helpers/ui.helper';
-import { Children, useState } from 'react';
-import { Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { FlatList, Text, View } from 'react-native';
 import { AddSource } from './_components/add-source/add-source';
 import { Button } from '@/components/ui/button';
 import { colors } from '@/themes/colors';
 import { Entypo } from '@expo/vector-icons';
 import { useSourceServices } from '@/store/use-source-services';
+import { IconContainer } from '@/components/shared/icon-container/icon-container';
 
 const { height } = getDimension();
 
 export default function Source() {
   const { auth, isLoading } = useGetAuth();
   const [showSourceModal, setShowSourceModal] = useState(false);
-  const { sources, loading } = useSourceServices();
+  const { sources, loading, fetch } = useSourceServices();
 
-  console.log(sources);
+  useEffect(() => {
+    fetch();
+  }, []);
 
   if (isLoading || loading)
     return (
@@ -29,23 +32,18 @@ export default function Source() {
   return (
     <View style={{ height: height - 120 }} className="relative">
       <ScreenHeader auth={auth!} />
+
       <Text className="text-white text-center text-2xl my-6">Sources</Text>
 
-      {/* <FlatList
+      <FlatList
         horizontal={false}
-        data={wallets}
+        data={sources}
         numColumns={4}
-        renderItem={(eachData) => <WalletContainer {...eachData.item} />}
+        renderItem={(eachData) => <IconContainer {...eachData.item} />}
         keyExtractor={(eachData) => eachData._id}
         columnWrapperStyle={{ gap: 24 }}
       />
 
-      
-      
-      <AddWallet
-        showWalletModal={showWalletModal}
-        onCloseWalletModal={() => setShowWalletModal(false)}
-      /> */}
       <View className="items-center absolute bottom-4 right-0">
         <Button
           onPress={() => setShowSourceModal(true)}

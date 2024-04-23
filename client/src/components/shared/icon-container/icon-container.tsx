@@ -1,12 +1,16 @@
-import { getIcon } from '@/components/shared/icon/icon-helper';
 import { getDimension } from '@/utils/helpers/ui.helper';
-import { TWallet } from '@/utils/types/data.types';
 import { Text, View } from 'react-native';
+import { TIcon, getIcon } from '../icon/icon-helper';
+
+type IconContainerProps = {
+  name: string;
+  icon: TIcon;
+};
 
 const { width } = getDimension();
 const containerSize = (width - 48 - 72) / 4;
 
-export function WalletContainer({ name, icon }: TWallet) {
+export function IconContainer({ name, icon }: IconContainerProps) {
   return (
     <View className="mb-6">
       <View
