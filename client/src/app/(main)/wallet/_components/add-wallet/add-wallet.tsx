@@ -56,7 +56,10 @@ export function AddWallet({ showModal, onCloseModal }: AddWalletProps) {
             {isLoading ? (
               <Loader />
             ) : (
-              <Button onPress={onAddWallet} customClass="flex-row">
+              <Button
+                onPress={onAddWallet}
+                customClass="flex-row min-w-[160px] justify-center"
+              >
                 <Text className="text-xl font-bold text-white mr-2">Add</Text>
                 <AntDesign name="plus" size={24} color="white" />
               </Button>

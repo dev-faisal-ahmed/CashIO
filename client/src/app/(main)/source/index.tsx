@@ -5,6 +5,9 @@ import { getDimension } from '@/utils/helpers/ui.helper';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
 import { AddSource } from './_components/add-source/add-source';
+import { Button } from '@/components/ui/button';
+import { colors } from '@/themes/colors';
+import { Entypo } from '@expo/vector-icons';
 
 const { height } = getDimension();
 
@@ -33,25 +36,27 @@ export default function Source() {
         columnWrapperStyle={{ gap: 24 }}
       />
 
+      
+      
+      <AddWallet
+        showWalletModal={showWalletModal}
+        onCloseWalletModal={() => setShowWalletModal(false)}
+      /> */}
       <View className="items-center absolute bottom-4 right-0">
         <Button
-          onPress={() => setShowWalletModal(true)}
+          onPress={() => setShowSourceModal(true)}
           customClass="bg-card-bg-dark p-4 pl-5 rounded-2xl flex-row justify-center"
         >
           <Text
             style={{ fontWeight: '500' }}
             className="text-primary-500 mr-1 "
           >
-            New Wallet
+            New Source
           </Text>
           <Entypo name="plus" size={24} color={colors.primary[500]} />
         </Button>
       </View>
-      
-      <AddWallet
-        showWalletModal={showWalletModal}
-        onCloseWalletModal={() => setShowWalletModal(false)}
-      /> */}
+
       <AddSource
         showModal={showSourceModal}
         onCloseModal={() => setShowSourceModal(false)}
