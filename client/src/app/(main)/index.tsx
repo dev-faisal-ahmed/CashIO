@@ -8,7 +8,7 @@ import { AUTH } from '@/utils/firebase.config';
 export default function Home() {
   const handleLogout = async () => {
     await signOut(AUTH);
-    toast.success('Logout Done!');
+    toast.success('Get Lost MF!');
   };
 
   return (

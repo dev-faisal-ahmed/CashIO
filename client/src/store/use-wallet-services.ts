@@ -19,12 +19,11 @@ export const useWalletServices = create<TWalletServices>((set, get) => ({
 
   fetch: async () => {
     // preventing unnecessary api calls
-    if (!get().firstFetch && !get().shouldRefetch) return;
+    const { firstFetch, shouldRefetch } = get();
+    if (!firstFetch && !shouldRefetch) return;
+
     set({ loading: true });
     set({ firstFetch: false });
-
-    // testing purpose
-    console.log('data fetching');
 
     try {
       const response = await fetchHelper({ url: 'wallet' });
@@ -41,7 +40,7 @@ export const useWalletServices = create<TWalletServices>((set, get) => ({
 
   refetch: async () => {
     set({ shouldRefetch: true });
-    const { fetch } = useWalletServices.getState();
+    const { fetch } = get();
     fetch();
     set({ shouldRefetch: false });
   },

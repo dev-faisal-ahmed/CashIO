@@ -64,7 +64,7 @@ export function IconPicker({ icon, updateIcon }: IconPickerProps) {
           <AntDesign name="plus" size={40} color="white" />
         )}
       </TouchableOpacity>
-      <Sheet isOpen={open} close={handleClose} position="TOP">
+      <Sheet padding={16} isOpen={open} close={handleClose} position="TOP">
         <FlatList
           data={iconsArray}
           numColumns={4}

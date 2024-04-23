@@ -11,6 +11,7 @@ import { AddWallet } from './_components/add-wallet/add-wallet';
 import { useEffect, useState } from 'react';
 import { useWalletServices } from '@/store/use-wallet-services';
 import { WalletContainer } from './_components/wallet-container/wallet-container';
+import { Grid } from '@/components/ui/grid';
 
 const { height } = getDimension();
 
