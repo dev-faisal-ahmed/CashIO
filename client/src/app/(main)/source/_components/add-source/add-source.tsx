@@ -1,28 +1,27 @@
 import { Input } from '@/components/shared/input/input';
 import { CloseModal } from '@/components/ui/close-modal';
 import { Modal, ScrollView, Text, View } from 'react-native';
-import { useAddWallet } from './use-add-wallet';
 import { CheckBox } from '@/components/shared/input/check-box';
 import { Button } from '@/components/ui/button';
 import { AntDesign } from '@expo/vector-icons';
 import { IconPicker } from '@/components/shared/icon/icon-picker';
 import { Loader } from '@/components/ui/loader';
 
-type AddWalletProps = {
+type AddSourceProps = {
   showModal: boolean;
   onCloseModal: () => void;
 };
 
-export function AddWallet({ showModal, onCloseModal }: AddWalletProps) {
-  const { states, handles } = useAddWallet({ onCloseModal });
-  const { name, balance, isSavingWallet, icon, isLoading } = states;
-  const {
-    onNameChange,
-    onBalanceChange,
-    handleSavingWalletToggle,
-    updateIcon,
-    onAddWallet,
-  } = handles;
+export function AddSource({ showModal, onCloseModal }: AddSourceProps) {
+  // const { states, handles } = useAddWallet({ onCloseWalletModal });
+  // const { name, balance, isSavingWallet, icon, isLoading } = states;
+  // const {
+  //   onNameChange,
+  //   onBalanceChange,
+  //   handleSavingWalletToggle,
+  //   updateIcon,
+  //   onAddWallet,
+  // } = handles;
 
   return (
     <Modal className="flex-1" animationType="slide" visible={showModal}>
@@ -31,7 +30,7 @@ export function AddWallet({ showModal, onCloseModal }: AddWalletProps) {
         <Text className="text-white text-lg mt-8 mb-6 text-center">
           Set Wallet Icon
         </Text>
-        <IconPicker icon={icon} updateIcon={updateIcon} />
+        {/* <IconPicker icon={icon} updateIcon={updateIcon} />
         <View style={{ gap: 16 }} className="mt-12">
           <Input
             placeholder="Name"
@@ -62,7 +61,7 @@ export function AddWallet({ showModal, onCloseModal }: AddWalletProps) {
               </Button>
             )}
           </View>
-        </View>
+        </View> */}
       </View>
     </Modal>
   );

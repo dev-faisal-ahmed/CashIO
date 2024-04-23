@@ -7,10 +7,10 @@ import { TAddWalletPayload } from '@/utils/types/server.types';
 import { useState } from 'react';
 
 type TUseAddWallet = {
-  onCloseWalletModal: () => void;
+  onCloseModal: () => void;
 };
 
-export const useAddWallet = ({ onCloseWalletModal }: TUseAddWallet) => {
+export const useAddWallet = ({ onCloseModal }: TUseAddWallet) => {
   const [name, onNameChange, setNameError] = useInput();
   const [balance, onBalanceChange, setBalanceError] = useInput();
   const [icon, setIcon] = useState<TIcon>();
@@ -52,7 +52,7 @@ export const useAddWallet = ({ onCloseWalletModal }: TUseAddWallet) => {
       if (!response.ok) throw new Error(response.message);
       toast.success(response.message);
       refetch();
-      onCloseWalletModal();
+      onCloseModal();
     } catch (err: any) {
       console.log(err);
       toast.error('Error Occurred!', err.message || 'Something went wrong');
