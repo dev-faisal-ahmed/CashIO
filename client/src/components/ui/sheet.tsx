@@ -9,6 +9,7 @@ type SheetProps = PropsWithChildren & {
   isOpen: boolean;
   close: () => void;
   position?: 'TOP' | 'BOTTOM';
+  padding?: number;
 };
 
 export function Sheet({
@@ -16,6 +17,7 @@ export function Sheet({
   close,
   children,
   position = 'BOTTOM',
+  padding = 24,
 }: SheetProps) {
   return isOpen ? (
     <TouchableOpacity
@@ -25,8 +27,9 @@ export function Sheet({
     >
       <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
         <View
+          style={{ padding: padding }}
           className={twMerge(
-            'p-6 bg-card-bg-dark rounded-3xl',
+            'bg-card-bg-dark rounded-3xl',
             position === 'TOP' ? 'rounded-t-none' : '',
             position === 'BOTTOM' ? 'mt-auto pb-12' : ''
           )}

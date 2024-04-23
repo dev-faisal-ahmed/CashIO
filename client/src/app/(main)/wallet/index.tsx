@@ -1,7 +1,7 @@
 import { ProfileIcon } from '@/components/shared/profile-icon/profile-icon';
 import { Loader } from '@/components/ui/loader';
 import { useGetAuth } from '@/hooks/use-get-auth';
-import { Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button } from '@/components/ui/button';
 import { Entypo } from '@expo/vector-icons';
@@ -43,11 +43,14 @@ export default function Wallet() {
       </View>
       <Text className="text-white text-center text-2xl my-6">Wallets</Text>
       {/* wallets list */}
-      <Grid spaceX={24} column={4}>
-        {wallets.map((wallet) => (
-          <WalletContainer key={wallet._id} {...wallet} />
-        ))}
-      </Grid>
+      <FlatList
+        horizontal={false}
+        data={wallets}
+        numColumns={4}
+        renderItem={(eachData) => <WalletContainer {...eachData.item} />}
+        keyExtractor={(eachData) => eachData._id}
+        columnWrapperStyle={{ gap: 24 }}
+      />
       {/* add wallet */}
       <View className="items-center absolute bottom-4 right-0">
         <Button
