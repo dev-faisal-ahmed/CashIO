@@ -1,4 +1,5 @@
 import { TIcon } from '@/components/shared/icon/icon-helper';
+import { TSourceType } from './data.types';
 
 export type TServerResponse<TData> = {
   status: number;
@@ -27,4 +28,11 @@ export type TAddWalletPayload = {
   initialBalance: number;
   icon: TIcon;
   saving: boolean;
+};
+
+export type TAddSourcePayload = {
+  name: string;
+  type: TSourceType;
+  budget?: number;
+  icon: TIcon;
 };

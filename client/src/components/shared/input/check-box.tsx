@@ -1,5 +1,6 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
+import { Feather } from '@expo/vector-icons';
 
 type CheckBoxProps = {
   customClass?: string;
@@ -20,15 +21,11 @@ export function CheckBox({
         onPress={onToggle}
         className={twMerge(
           'w-8 h-8 rounded-lg border border-primary-500 p-1',
-          customClass
+          customClass,
+          isSelected ? 'bg-card-bg-dark border-card-bg-dark' : ''
         )}
       >
-        {isSelected && (
-          <View
-            style={{ borderRadius: 6 }}
-            className="w-full h-full bg-primary-500"
-          />
-        )}
+        {isSelected && <Feather name="check" size={24} color="white" />}
       </TouchableOpacity>
       <Text className="text-white ml-4">{placeholder}</Text>
     </View>

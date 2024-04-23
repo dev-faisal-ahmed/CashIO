@@ -1,9 +1,9 @@
 import { fetchHelper } from '@/utils/helpers/fetch.helper';
-import { TWallet } from '@/utils/types/data.types';
+import { TSource } from '@/utils/types/data.types';
 import { create } from 'zustand';
 
-type TWalletServices = {
-  wallets: TWallet[];
+type TSourceServices = {
+  sources: TSource[];
   loading: boolean;
   fetch: () => void;
   refetch: () => void;
@@ -11,14 +11,12 @@ type TWalletServices = {
   shouldRefetch: boolean;
 };
 
-export const useWalletServices = create<TWalletServices>((set, get) => ({
-  wallets: [],
+export const useSourceServices = create<TSourceServices>((set, get) => ({
+  sources: [],
   loading: false,
   firstFetch: true,
   shouldRefetch: false,
-
   fetch: async () => {
-    // preventing unnecessary api calls
     const { firstFetch, shouldRefetch } = get();
     if (!firstFetch && !shouldRefetch) return;
 
@@ -26,9 +24,9 @@ export const useWalletServices = create<TWalletServices>((set, get) => ({
     set({ firstFetch: false });
 
     try {
-      const response = await fetchHelper({ url: 'wallet' });
-      if (response.ok) set({ wallets: response.data as TWallet[] });
-      else set({ wallets: [] });
+      const response = await fetchHelper({ url: 'source' });
+      if (response.ok) set({ sources: response.data as TSource[] });
+      else set({ sources: [] });
     } catch (err) {
       console.log(err);
       // so that it can be fetched later
@@ -37,7 +35,6 @@ export const useWalletServices = create<TWalletServices>((set, get) => ({
       set({ loading: false });
     }
   },
-
   refetch: () => {
     set({ shouldRefetch: true });
     const { fetch } = get();

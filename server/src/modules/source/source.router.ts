@@ -12,3 +12,5 @@ sourceRouter.post(
   validationHandler(sourceValidation.CreateSources),
   sourceController.createSource
 );
+
+sourceRouter.get('/', authGuard, sourceController.getSource);

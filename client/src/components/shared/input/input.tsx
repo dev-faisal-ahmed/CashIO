@@ -23,7 +23,7 @@ export function Input({
       <TextInput
         placeholderTextColor={'white'}
         style={{ backgroundColor: colors.card.bg.dark }}
-        className="text-lg px-8 py-4 rounded-full text-white"
+        className="text-lg px-8 py-4 rounded-2xl text-white"
         placeholder={placeholder}
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
