@@ -12,11 +12,13 @@ import { Text, TouchableWithoutFeedback, View } from 'react-native';
 
 type TDatePickerContext = {
   date: Date;
-  onDateChange: (date: Date) => void;
   showDay: boolean;
   setShowDay: Dispatch<SetStateAction<boolean>>;
+  showMonth: boolean;
+  setShowMonth: Dispatch<SetStateAction<boolean>>;
   getDays: () => number[];
   updateDay: (day: number) => void;
+  updateMonth: (month: number) => void;
 };
 
 const months = [
@@ -40,10 +42,7 @@ const DatePickerContext = createContext<TDatePickerContext | null>(null);
 export function DatePickerProvider({ children }: PropsWithChildren) {
   const [date, setDate] = useState(new Date());
   const [showDay, setShowDay] = useState(false);
-
-  const onDateChange = (date: Date) => {
-    setDate(date);
-  };
+  const [showMonth, setShowMonth] = useState(false);
 
   const getDays = () => {
     const totalDays = new Date(
@@ -62,13 +61,29 @@ export function DatePickerProvider({ children }: PropsWithChildren) {
     console.log(day);
     const currentDate = date;
     currentDate.setDate(day);
-    onDateChange(currentDate);
+    setDate(currentDate);
     setShowDay(false);
+  };
+
+  const updateMonth = (month: number) => {
+    const currentDate = date;
+    currentDate.setMonth(month);
+    setDate(currentDate);
+    setShowMonth(false);
   };
 
   return (
     <DatePickerContext.Provider
-      value={{ date, onDateChange, getDays, showDay, setShowDay, updateDay }}
+      value={{
+        date,
+        getDays,
+        showDay,
+        setShowDay,
+        updateDay,
+        showMonth,
+        setShowMonth,
+        updateMonth,
+      }}
     >
       {children}
     </DatePickerContext.Provider>
@@ -76,7 +91,7 @@ export function DatePickerProvider({ children }: PropsWithChildren) {
 }
 
 export function DatePicker() {
-  const { date, setShowDay } = useContext(DatePickerContext)!;
+  const { date, setShowDay, setShowMonth } = useContext(DatePickerContext)!;
   return (
     <View
       style={{ gap: 16 }}
@@ -87,9 +102,13 @@ export function DatePicker() {
           {date.getDate()}
         </Text>
       </TouchableWithoutFeedback>
-      <Text className="text-white  text-base font-semibold flex-1 bg-card-bg-dark py-2 rounded-lg text-center">
-        {months[date.getMonth()]}
-      </Text>
+
+      <TouchableWithoutFeedback onPress={() => setShowMonth(true)}>
+        <Text className="text-white  text-base font-semibold flex-1 bg-card-bg-dark py-2 rounded-lg text-center">
+          {months[date.getMonth()]}
+        </Text>
+      </TouchableWithoutFeedback>
+
       <Text className="text-white text-base font-semibold flex-1 bg-card-bg-dark py-2 rounded-lg text-center">
         {date.getFullYear()}
       </Text>
@@ -112,9 +131,35 @@ export function DayPicker() {
           >
             <Text
               style={{ width: eachDayItemWidth }}
-              className="text-white text-center text-base border border-white rounded-lg"
+              className="text-white text-center text-base border border-white rounded-lg py-1"
             >
               {eachDay}
+            </Text>
+          </TouchableWithoutFeedback>
+        ))}
+      </View>
+    </Sheet>
+  );
+}
+
+const eachMonthItemWidth = (width - 90) / 3;
+
+export function MonthPicker() {
+  const { showMonth, setShowMonth, updateMonth } =
+    useContext(DatePickerContext)!;
+  return (
+    <Sheet isOpen={showMonth} close={() => setShowMonth(false)}>
+      <View style={{ gap: 20 }} className="flex-row flex-wrap pb-4">
+        {months.map((month, index) => (
+          <TouchableWithoutFeedback
+            key={month}
+            onPress={() => updateMonth(index)}
+          >
+            <Text
+              style={{ width: eachMonthItemWidth }}
+              className="text-white text-center text-base border border-white rounded-lg py-1"
+            >
+              {month}
             </Text>
           </TouchableWithoutFeedback>
         ))}
