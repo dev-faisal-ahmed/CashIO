@@ -18,7 +18,7 @@ export function TabBar() {
       ))}
 
       <TouchableOpacity
-        onPress={() => router.push('/')}
+        onPress={() => router.push('/add-trade')}
         style={{
           borderRadius: 24,
           borderColor: colors.primary[500],

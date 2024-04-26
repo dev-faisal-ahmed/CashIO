@@ -30,7 +30,12 @@ export function Sheet({
   return isOpen ? (
     <TouchableOpacity
       onPress={close}
-      style={{ height, width: sheetWidth ? sheetWidth : width }}
+      style={{
+        height,
+        width: sheetWidth ? sheetWidth : width,
+        top: 0,
+        left: 0,
+      }}
       className="absolute z-10 flex-1"
     >
       <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>

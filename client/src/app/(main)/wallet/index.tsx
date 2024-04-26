@@ -30,7 +30,7 @@ export default function Wallet() {
     );
 
   return (
-    <View style={{ height: height - 120 }} className="relative">
+    <View style={{ height: height - 120, position: 'relative' }}>
       <ScreenHeader auth={auth!} />
 
       <Text className="text-white text-center text-2xl my-6">Wallets</Text>
