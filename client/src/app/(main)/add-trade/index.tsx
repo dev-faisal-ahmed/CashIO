@@ -8,6 +8,7 @@ import {
   DatePickerProvider,
   DayPicker,
   MonthPicker,
+  YearPicker,
 } from '@/components/shared/date-picker/date-picker';
 
 export default function AddTrade() {
@@ -37,6 +38,7 @@ export default function AddTrade() {
 
       <DayPicker />
       <MonthPicker />
+      <YearPicker />
     </DatePickerProvider>
   );
 }

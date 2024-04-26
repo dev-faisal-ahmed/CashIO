@@ -1,24 +1,28 @@
-import { Sheet } from '@/components/ui/sheet';
-import { getDimension } from '@/utils/helpers/ui.helper';
 import {
   Dispatch,
   PropsWithChildren,
   SetStateAction,
   createContext,
   useContext,
-  useState,
 } from 'react';
+import { Sheet } from '@/components/ui/sheet';
+import { getDimension } from '@/utils/helpers/ui.helper';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import { useDatePicker } from './use-date-picker';
 
 type TDatePickerContext = {
   date: Date;
   showDay: boolean;
-  setShowDay: Dispatch<SetStateAction<boolean>>;
   showMonth: boolean;
+  showYear: boolean;
+  setShowDay: Dispatch<SetStateAction<boolean>>;
   setShowMonth: Dispatch<SetStateAction<boolean>>;
+  setShowYear: Dispatch<SetStateAction<boolean>>;
   getDays: () => number[];
+  getYears: () => number[];
   updateDay: (day: number) => void;
   updateMonth: (month: number) => void;
+  updateYear: (year: number) => void;
 };
 
 const months = [
@@ -40,58 +44,18 @@ const { width } = getDimension();
 const DatePickerContext = createContext<TDatePickerContext | null>(null);
 
 export function DatePickerProvider({ children }: PropsWithChildren) {
-  const [date, setDate] = useState(new Date());
-  const [showDay, setShowDay] = useState(false);
-  const [showMonth, setShowMonth] = useState(false);
-
-  const getDays = () => {
-    const totalDays = new Date(
-      date.getFullYear(),
-      date.getMonth() + 1,
-      0
-    ).getDate();
-
-    const days: number[] = [];
-    for (let i = 1; i <= totalDays; i++) days.push(i);
-
-    return days;
-  };
-
-  const updateDay = (day: number) => {
-    console.log(day);
-    const currentDate = date;
-    currentDate.setDate(day);
-    setDate(currentDate);
-    setShowDay(false);
-  };
-
-  const updateMonth = (month: number) => {
-    const currentDate = date;
-    currentDate.setMonth(month);
-    setDate(currentDate);
-    setShowMonth(false);
-  };
+  const { states, handlers } = useDatePicker();
 
   return (
-    <DatePickerContext.Provider
-      value={{
-        date,
-        getDays,
-        showDay,
-        setShowDay,
-        updateDay,
-        showMonth,
-        setShowMonth,
-        updateMonth,
-      }}
-    >
+    <DatePickerContext.Provider value={{ ...states, ...handlers }}>
       {children}
     </DatePickerContext.Provider>
   );
 }
 
 export function DatePicker() {
-  const { date, setShowDay, setShowMonth } = useContext(DatePickerContext)!;
+  const { date, setShowDay, setShowMonth, setShowYear } =
+    useContext(DatePickerContext)!;
   return (
     <View
       style={{ gap: 16 }}
@@ -109,9 +73,11 @@ export function DatePicker() {
         </Text>
       </TouchableWithoutFeedback>
 
-      <Text className="text-white text-base font-semibold flex-1 bg-card-bg-dark py-2 rounded-lg text-center">
-        {date.getFullYear()}
-      </Text>
+      <TouchableWithoutFeedback onPress={() => setShowYear(true)}>
+        <Text className="text-white text-base font-semibold flex-1 bg-card-bg-dark py-2 rounded-lg text-center">
+          {date.getFullYear()}
+        </Text>
+      </TouchableWithoutFeedback>
     </View>
   );
 }
@@ -160,6 +126,29 @@ export function MonthPicker() {
               className="text-white text-center text-base border border-white rounded-lg py-1"
             >
               {month}
+            </Text>
+          </TouchableWithoutFeedback>
+        ))}
+      </View>
+    </Sheet>
+  );
+}
+
+const eachYearItemWidth = (width - 110) / 4;
+
+export function YearPicker() {
+  const { showYear, setShowYear, getYears, updateYear } =
+    useContext(DatePickerContext)!;
+  return (
+    <Sheet isOpen={showYear} close={() => setShowYear(false)}>
+      <View style={{ gap: 20 }} className="flex-row flex-wrap pb-4">
+        {getYears().map((year) => (
+          <TouchableWithoutFeedback key={year} onPress={() => updateYear(year)}>
+            <Text
+              style={{ width: eachYearItemWidth }}
+              className="text-white text-center text-base border border-white rounded-lg py-1"
+            >
+              {year}
             </Text>
           </TouchableWithoutFeedback>
         ))}
