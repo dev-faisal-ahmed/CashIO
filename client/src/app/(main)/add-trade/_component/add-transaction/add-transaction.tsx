@@ -37,20 +37,42 @@ export function AddTransaction({ tardeType, amount }: AddTransactionProps) {
   return (
     <>
       <View>
-        <SourcePicker
-          sources={sources}
-          onSourceUpdate={onSourceUpdate}
-          selectedSource={selectedSource}
-          setShowSources={setShowSources}
-          showSources={showSources}
-        />
-        <WalletsPicker
-          wallets={wallets}
-          onWalletUpdate={onWalletUpdate}
-          selectedWallet={selectedWallet}
-          setShowWallets={setShowWallets}
-          showWallets={showWallets}
-        />
+        {sources.length && selectedSource ? (
+          <SourcePicker
+            sources={sources}
+            onSourceUpdate={onSourceUpdate}
+            selectedSource={selectedSource}
+            setShowSources={setShowSources}
+            showSources={showSources}
+          />
+        ) : (
+          <>
+            {!sourceLoading && (
+              <Text className="text-white font-bold text-center">
+                No Source Found, Please Add A Source First
+              </Text>
+            )}
+          </>
+        )}
+
+        {wallets.length && selectedWallet ? (
+          <WalletsPicker
+            wallets={wallets}
+            onWalletUpdate={onWalletUpdate}
+            selectedWallet={selectedWallet}
+            setShowWallets={setShowWallets}
+            showWallets={showWallets}
+          />
+        ) : (
+          <>
+            {!walletLoading && (
+              <Text className="text-white font-bold text-center">
+                No Wallets Found, Please Add A Wallet First
+              </Text>
+            )}
+          </>
+        )}
+
         <Button customClass="mt-6">
           <Text className="text-white">Add Transaction</Text>
         </Button>

@@ -40,34 +40,23 @@ export function WalletsPicker({
         </TouchableOpacity>
       </View>
       <View className="mt-5 flex-row">
-        <>
-          {remWallets.length ? (
-            <>
-              <ActiveButton
-                _id={selectedWallet?._id}
-                active_Id={selectedWallet?._id}
-                onPress={() => onWalletUpdate(selectedWallet)}
-                value={selectedWallet?.name}
-              />
+        <ActiveButton
+          _id={selectedWallet._id}
+          active_Id={selectedWallet._id}
+          onPress={() => onWalletUpdate(selectedWallet)}
+          value={selectedWallet?.name}
+        />
 
-              {remWallets.slice(0, 2).map((wallet) => (
-                <ActiveButton
-                  key={wallet._id}
-                  _id={wallet._id}
-                  active_Id={selectedWallet._id}
-                  onPress={() => onWalletUpdate(wallet)}
-                  value={wallet.name}
-                />
-              ))}
-            </>
-          ) : (
-            <>
-              <Text className="text-white font-bold text-center">
-                No Source Found, Please Add A Source First
-              </Text>
-            </>
-          )}
-        </>
+        {remWallets.slice(0, 2).map((wallet) => (
+          <ActiveButton
+            key={wallet._id}
+            _id={wallet._id}
+            active_Id={selectedWallet._id}
+            onPress={() => onWalletUpdate(wallet)}
+            value={wallet.name}
+          />
+        ))}
+
         <Modal animationType="slide" visible={showWallets}>
           <View className="bg-bg-dark flex-1 px-6 py-5">
             <CloseModal onCloseModal={() => setShowWallets(false)} />

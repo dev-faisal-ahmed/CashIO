@@ -43,10 +43,10 @@ export function SourcePicker({
           {remSources.length ? (
             <>
               <ActiveButton
-                _id={selectedSource?._id}
-                active_Id={selectedSource?._id}
+                _id={selectedSource._id}
+                active_Id={selectedSource._id}
                 onPress={() => onSourceUpdate(selectedSource)}
-                value={selectedSource?.name}
+                value={selectedSource.name}
               />
 
               {remSources.slice(0, 2).map((source) => (

@@ -35,10 +35,6 @@ export const useAddTransaction = ({
   const [showSources, setShowSources] = useState(false);
   const [showWallets, setShowWallets] = useState(false);
 
-  const remSources = useMemo(() => {
-    return sources.filter((source) => source._id !== selectedSource._id);
-  }, [selectedSource, sources]);
-
   const onSourceUpdate = (source: TSource) => setSelectedSource(source);
   const onWalletUpdate = (wallet: TWallet) => setSelectedWallet(wallet);
 
@@ -59,7 +55,6 @@ export const useAddTransaction = ({
     states: {
       sources,
       wallets,
-      remSources,
       sourceLoading,
       walletLoading,
       selectedSource,
