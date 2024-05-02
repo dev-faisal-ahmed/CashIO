@@ -1,8 +1,3 @@
-import { ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { useAddTrade } from './use-add-trade';
-import { Input } from '@/components/shared/input/input';
-import { TradeTypeButton } from './_component/trade-type-button';
-import { getDimension } from '@/utils/helpers/ui.helper';
 import {
   DatePicker,
   DatePickerProvider,
@@ -10,6 +5,11 @@ import {
   MonthPicker,
   YearPicker,
 } from '@/components/shared/date-picker/date-picker';
+import { ScrollView, Text } from 'react-native';
+import { useAddTrade } from './use-add-trade';
+import { Input } from '@/components/shared/input/input';
+import { TradeTypeButton } from './_component/trade-type-button';
+import { AddTransaction } from './_component/add-transaction/add-transaction';
 
 export default function AddTrade() {
   const { states, handlers } = useAddTrade();
@@ -34,6 +34,12 @@ export default function AddTrade() {
           onSelectedTypeChanges={onSelectedTradeTypeChange}
         />
         <DatePicker />
+
+        {/* add transaction */}
+        {(selectedTradeType === 'INCOME' ||
+          selectedTradeType === 'EXPENSE') && (
+          <AddTransaction amount={amount.value} tardeType={selectedTradeType} />
+        )}
       </ScrollView>
 
       <DayPicker />

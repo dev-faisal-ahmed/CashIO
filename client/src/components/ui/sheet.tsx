@@ -28,28 +28,27 @@ export function Sheet({
   sheetWidth,
 }: SheetProps) {
   return isOpen ? (
-    <TouchableOpacity
-      onPress={close}
-      style={{
-        height,
-        width: sheetWidth ? sheetWidth : width,
-        top: 0,
-        left: 0,
-      }}
-      className="absolute z-10 flex-1"
-    >
-      <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
-        <View
-          style={[{ padding: 24 }, style]}
-          className={twMerge(
-            'bg-card-bg-dark rounded-3xl',
-            position === 'TOP' ? 'rounded-t-none' : '',
-            position === 'BOTTOM' ? 'mt-auto pb-12' : ''
-          )}
-        >
-          {children}
-        </View>
-      </TouchableWithoutFeedback>
-    </TouchableOpacity>
+    <View className="absolute z-10 flex-1">
+      <TouchableOpacity
+        onPress={close}
+        style={{
+          height,
+          width: sheetWidth ? sheetWidth : width,
+        }}
+      >
+        <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
+          <View
+            style={[{ padding: 24 }, style]}
+            className={twMerge(
+              'bg-card-bg-dark rounded-3xl',
+              position === 'TOP' ? 'rounded-t-none' : '',
+              position === 'BOTTOM' ? 'mt-auto pb-12' : ''
+            )}
+          >
+            {children}
+          </View>
+        </TouchableWithoutFeedback>
+      </TouchableOpacity>
+    </View>
   ) : null;
 }
