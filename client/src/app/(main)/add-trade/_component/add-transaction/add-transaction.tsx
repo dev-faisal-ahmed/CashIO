@@ -5,9 +5,17 @@ import { Button } from '@/components/ui/button';
 import { WalletsPicker } from './walletsPicker';
 import { SourcePicker } from './source-picker';
 
-type AddTransactionProps = { tardeType: 'EXPENSE' | 'INCOME'; amount: string };
+type AddTransactionProps = {
+  tardeType: 'EXPENSE' | 'INCOME';
+  amount: string;
+  setAmountError: (msg: string) => void;
+};
 
-export function AddTransaction({ tardeType, amount }: AddTransactionProps) {
+export function AddTransaction({
+  tardeType,
+  amount,
+  setAmountError,
+}: AddTransactionProps) {
   const {
     states: {
       sources,
@@ -18,14 +26,16 @@ export function AddTransaction({ tardeType, amount }: AddTransactionProps) {
       selectedWallet,
       showSources,
       showWallets,
+      apiLoading,
     },
     handlers: {
       onSourceUpdate,
       setShowSources,
       onWalletUpdate,
       setShowWallets,
+      onAddTransaction,
     },
-  } = useAddTransaction({ amount, tardeType });
+  } = useAddTransaction({ amount, tardeType, setAmountError });
 
   if (sourceLoading || walletLoading)
     return (
@@ -73,9 +83,15 @@ export function AddTransaction({ tardeType, amount }: AddTransactionProps) {
           </>
         )}
 
-        <Button customClass="mt-6">
-          <Text className="text-white">Add Transaction</Text>
-        </Button>
+        <View className="mt-6">
+          {apiLoading ? (
+            <Loader />
+          ) : (
+            <Button onPress={onAddTransaction}>
+              <Text className="text-white">Add Transaction</Text>
+            </Button>
+          )}
+        </View>
       </View>
     </>
   );

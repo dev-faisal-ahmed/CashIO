@@ -14,6 +14,7 @@ export const useAddTrade = () => {
     handlers: {
       onAmountChange,
       onSelectedTradeTypeChange,
+      setAmountError,
     },
   };
 };

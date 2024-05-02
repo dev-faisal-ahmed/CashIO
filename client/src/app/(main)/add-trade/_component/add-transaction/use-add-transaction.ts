@@ -1,16 +1,22 @@
+import { DatePickerContext } from '@/components/shared/date-picker/date-picker';
+import { TAddTransactionPayload } from '@/utils/types/server.types';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useSourceServices } from '@/store/use-source-services';
 import { useWalletServices } from '@/store/use-wallet-services';
+import { fetchHelper } from '@/utils/helpers/fetch.helper';
 import { TSource, TWallet } from '@/utils/types/data.types';
-import { useEffect, useMemo, useState } from 'react';
+import { toast } from '@/utils/helpers/toast.helper';
 
 type TUseAddTransaction = {
   tardeType: 'EXPENSE' | 'INCOME';
   amount: string;
+  setAmountError: (msg: string) => void;
 };
 
 export const useAddTransaction = ({
   tardeType,
   amount,
+  setAmountError,
 }: TUseAddTransaction) => {
   const {
     fetch: fetchSources,
@@ -34,9 +40,38 @@ export const useAddTransaction = ({
   const [selectedWallet, setSelectedWallet] = useState(wallets[0]);
   const [showSources, setShowSources] = useState(false);
   const [showWallets, setShowWallets] = useState(false);
+  const [apiLoading, setApiLoading] = useState(false);
+  const { date } = useContext(DatePickerContext)!;
 
   const onSourceUpdate = (source: TSource) => setSelectedSource(source);
   const onWalletUpdate = (wallet: TWallet) => setSelectedWallet(wallet);
+
+  const onAddTransaction = async () => {
+    setAmountError('');
+    if (!amount) return setAmountError('Amount is required');
+
+    try {
+      setApiLoading(true);
+      const response = await fetchHelper<any, TAddTransactionPayload>({
+        url: '/transaction',
+        method: 'POST',
+        body: {
+          amount: Number(amount),
+          sourceId: selectedSource._id,
+          walletId: selectedWallet._id,
+          date: date.getTime(),
+        },
+      });
+
+      if (!response.ok) throw new Error(response.message);
+      toast.success(response.message);
+    } catch (err: any) {
+      console.log(err);
+      toast.error('Error Occurred!', err.message || 'Something went wrong');
+    } finally {
+      setApiLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchSources();
@@ -61,6 +96,7 @@ export const useAddTransaction = ({
       selectedWallet,
       showSources,
       showWallets,
+      apiLoading,
     },
 
     handlers: {
@@ -68,6 +104,7 @@ export const useAddTransaction = ({
       setShowSources,
       setShowWallets,
       onWalletUpdate,
+      onAddTransaction,
     },
   };
 };

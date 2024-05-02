@@ -36,3 +36,10 @@ export type TAddSourcePayload = {
   budget?: number;
   icon: TIcon;
 };
+
+export type TAddTransactionPayload = {
+  walletId: string;
+  sourceId: string;
+  amount: number;
+  date: number;
+};

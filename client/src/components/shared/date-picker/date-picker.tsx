@@ -41,7 +41,7 @@ const months = [
 ];
 
 const { width } = getDimension();
-const DatePickerContext = createContext<TDatePickerContext | null>(null);
+export const DatePickerContext = createContext<TDatePickerContext | null>(null);
 
 export function DatePickerProvider({ children }: PropsWithChildren) {
   const { states, handlers } = useDatePicker();
