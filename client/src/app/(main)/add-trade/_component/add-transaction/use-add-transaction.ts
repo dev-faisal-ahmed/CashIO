@@ -39,10 +39,6 @@ export const useAddTransaction = ({
     return sources.filter((source) => source._id !== selectedSource._id);
   }, [selectedSource, sources]);
 
-  const remWallets = useMemo(() => {
-    return wallets.filter((wallet) => wallet._id !== selectedWallet._id);
-  }, [selectedWallet, wallets]);
-
   const onSourceUpdate = (source: TSource) => setSelectedSource(source);
   const onWalletUpdate = (wallet: TWallet) => setSelectedWallet(wallet);
 
@@ -64,7 +60,6 @@ export const useAddTransaction = ({
       sources,
       wallets,
       remSources,
-      remWallets,
       sourceLoading,
       walletLoading,
       selectedSource,
