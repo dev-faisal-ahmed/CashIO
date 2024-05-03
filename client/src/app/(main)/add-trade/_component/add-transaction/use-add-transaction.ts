@@ -6,20 +6,9 @@ import { useWalletServices } from '@/store/use-wallet-services';
 import { fetchHelper } from '@/utils/helpers/fetch.helper';
 import { TSource, TTransactionType, TWallet } from '@/utils/types/data.types';
 import { toast } from '@/utils/helpers/toast.helper';
+import { AddTradeContext } from '../add-trade-context';
 
-type TUseAddTransaction = {
-  tardeType: TTransactionType;
-  amount: string;
-  setAmountError: (msg: string) => void;
-  resetAmount: () => void;
-};
-
-export const useAddTransaction = ({
-  tardeType,
-  amount,
-  setAmountError,
-  resetAmount,
-}: TUseAddTransaction) => {
+export const useAddTransaction = () => {
   const {
     fetch: fetchSources,
     sources: data,
@@ -32,11 +21,16 @@ export const useAddTransaction = ({
     loading: walletLoading,
   } = useWalletServices();
 
+  const {
+    states: { amount, selectedTradeType },
+    handlers: { setAmountError, onAmountChange },
+  } = useContext(AddTradeContext)!;
+
   const sources = useMemo(() => {
     return data.filter(
-      (source) => source.type === tardeType || source.type === 'BOTH'
+      (source) => source.type === selectedTradeType || source.type === 'BOTH'
     );
-  }, [tardeType, data]);
+  }, [selectedTradeType, data]);
 
   const [selectedSource, setSelectedSource] = useState(sources[0]);
   const [selectedWallet, setSelectedWallet] = useState(wallets[0]);
@@ -50,7 +44,7 @@ export const useAddTransaction = ({
 
   const onAddTransaction = async () => {
     setAmountError('');
-    if (!amount) return setAmountError('Amount is required');
+    if (!amount.value) return setAmountError('Amount is required');
 
     try {
       setApiLoading(true);
@@ -58,17 +52,17 @@ export const useAddTransaction = ({
         url: '/transaction',
         method: 'POST',
         body: {
-          amount: Number(amount),
+          amount: Number(amount.value),
           sourceId: selectedSource._id,
           walletId: selectedWallet._id,
-          type: tardeType,
+          type: selectedTradeType as TTransactionType,
           date: date.getTime(),
         },
       });
 
       if (!response.ok) throw new Error(response.message);
       toast.success(response.message);
-      resetAmount();
+      onAmountChange('');
     } catch (err: any) {
       console.log(err);
       toast.error('Error Occurred!', err.message || 'Something went wrong');

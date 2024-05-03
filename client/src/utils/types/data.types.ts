@@ -21,3 +21,5 @@ export type TSource = {
 };
 
 export type TTransactionType = 'INCOME' | 'EXPENSE';
+
+export type TTradeTypes = 'EXPENSE' | 'INCOME' | 'LEND' | 'BORROW' | 'TRANSFER';

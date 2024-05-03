@@ -1,32 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
-
-type TradeTypeButtonProps = {
-  selectedType: string;
-  onSelectedTypeChanges: (value: string) => void;
-};
+import { AddTradeContext } from './add-trade-context';
+import { TTradeTypes } from '@/utils/types/data.types';
 
 const tardeTypes = ['EXPENSE', 'INCOME', 'LEND', 'BORROW', 'TRANSFER'];
 
-export function TradeTypeButton({
-  selectedType,
-  onSelectedTypeChanges,
-}: TradeTypeButtonProps) {
+export function TradeTypeButton() {
+  const {
+    states: { selectedTradeType },
+    handlers: { onSelectedTradeTypeChange },
+  } = useContext(AddTradeContext)!;
   return (
     <View className="mt-6">
       <Text className="text-white text-base font-bold mb-4">Type</Text>
       <View className="flex-wrap w-full flex-row">
         {tardeTypes.slice(0, 2).map((eachType) => (
           <React.Fragment key={eachType}>
-            {tradeButton(eachType, selectedType, onSelectedTypeChanges)}
+            {tradeButton(
+              eachType,
+              selectedTradeType,
+              onSelectedTradeTypeChange
+            )}
           </React.Fragment>
         ))}
       </View>
       <View className="flex-wrap w-full flex-row mt-2">
         {tardeTypes.slice(2, 5).map((eachType) => (
           <React.Fragment key={eachType}>
-            {tradeButton(eachType, selectedType, onSelectedTypeChanges)}
+            {tradeButton(
+              eachType,
+              selectedTradeType,
+              onSelectedTradeTypeChange
+            )}
           </React.Fragment>
         ))}
       </View>
@@ -37,12 +43,12 @@ export function TradeTypeButton({
 const tradeButton = (
   value: string,
   active: string,
-  onSelectedTypeChanges: (value: string) => void
+  onSelectedTypeChanges: (value: TTradeTypes) => void
 ) => {
   return (
     <>
       <TouchableOpacity
-        onPress={() => onSelectedTypeChanges(value)}
+        onPress={() => onSelectedTypeChanges(value as TTradeTypes)}
         className={twMerge(
           'py-2 flex-1 rounded-lg',
           value === active ? 'bg-primary-500' : ''
