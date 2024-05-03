@@ -19,3 +19,5 @@ export type TSource = {
   type: TSourceType;
   icon: TIcon;
 };
+
+export type TTransactionType = 'INCOME' | 'EXPENSE';

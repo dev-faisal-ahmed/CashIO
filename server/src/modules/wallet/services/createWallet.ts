@@ -17,6 +17,10 @@ export const createWallet = async (
   if (isWalletExist)
     throw new AppError('Wallet Already Exist', StatusCodes.BAD_REQUEST);
 
-  const newWallet = await Wallet.create({ ...payload, userId: user._id });
+  const newWallet = await Wallet.create({
+    ...payload,
+    userId: user._id,
+    income: payload.initialBalance || 0,
+  });
   return newWallet;
 };

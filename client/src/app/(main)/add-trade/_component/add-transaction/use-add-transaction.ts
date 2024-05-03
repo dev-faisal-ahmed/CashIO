@@ -4,19 +4,21 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { useSourceServices } from '@/store/use-source-services';
 import { useWalletServices } from '@/store/use-wallet-services';
 import { fetchHelper } from '@/utils/helpers/fetch.helper';
-import { TSource, TWallet } from '@/utils/types/data.types';
+import { TSource, TTransactionType, TWallet } from '@/utils/types/data.types';
 import { toast } from '@/utils/helpers/toast.helper';
 
 type TUseAddTransaction = {
-  tardeType: 'EXPENSE' | 'INCOME';
+  tardeType: TTransactionType;
   amount: string;
   setAmountError: (msg: string) => void;
+  resetAmount: () => void;
 };
 
 export const useAddTransaction = ({
   tardeType,
   amount,
   setAmountError,
+  resetAmount,
 }: TUseAddTransaction) => {
   const {
     fetch: fetchSources,
@@ -59,12 +61,14 @@ export const useAddTransaction = ({
           amount: Number(amount),
           sourceId: selectedSource._id,
           walletId: selectedWallet._id,
+          type: tardeType,
           date: date.getTime(),
         },
       });
 
       if (!response.ok) throw new Error(response.message);
       toast.success(response.message);
+      resetAmount();
     } catch (err: any) {
       console.log(err);
       toast.error('Error Occurred!', err.message || 'Something went wrong');

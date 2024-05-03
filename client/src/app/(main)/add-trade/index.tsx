@@ -50,6 +50,7 @@ export default function AddTrade() {
             amount={amount.value}
             tardeType={selectedTradeType}
             setAmountError={setAmountError}
+            resetAmount={() => onAmountChange('')}
           />
         )}
       </ScrollView>

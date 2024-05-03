@@ -4,17 +4,20 @@ import { Loader } from '@/components/ui/loader';
 import { Button } from '@/components/ui/button';
 import { WalletsPicker } from './walletsPicker';
 import { SourcePicker } from './source-picker';
+import { TTransactionType } from '@/utils/types/data.types';
 
 type AddTransactionProps = {
-  tardeType: 'EXPENSE' | 'INCOME';
+  tardeType: TTransactionType;
   amount: string;
   setAmountError: (msg: string) => void;
+  resetAmount: () => void;
 };
 
 export function AddTransaction({
   tardeType,
   amount,
   setAmountError,
+  resetAmount,
 }: AddTransactionProps) {
   const {
     states: {
@@ -35,7 +38,7 @@ export function AddTransaction({
       setShowWallets,
       onAddTransaction,
     },
-  } = useAddTransaction({ amount, tardeType, setAmountError });
+  } = useAddTransaction({ amount, tardeType, setAmountError, resetAmount });
 
   if (sourceLoading || walletLoading)
     return (

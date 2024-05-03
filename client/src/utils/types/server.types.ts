@@ -1,5 +1,5 @@
 import { TIcon } from '@/components/shared/icon/icon-helper';
-import { TSourceType } from './data.types';
+import { TSourceType, TTransactionType } from './data.types';
 
 export type TServerResponse<TData> = {
   status: number;
@@ -42,4 +42,5 @@ export type TAddTransactionPayload = {
   sourceId: string;
   amount: number;
   date: number;
+  type: TTransactionType;
 };
