@@ -23,4 +23,15 @@ const getWallets = tryCatch(async (req, res) => {
   });
 });
 
-export const walletController = { createWallet, getWallets };
+const getWallet = tryCatch(async (req, res) => {
+  const { walletId } = req.params;
+  const walletInfo = await walletServices.getWallet(walletId);
+
+  sendSuccessResponse(res, {
+    status: StatusCodes.OK,
+    message: 'Wallet Info Retrieved Successfully',
+    data: walletInfo,
+  });
+});
+
+export const walletController = { createWallet, getWallets, getWallet };

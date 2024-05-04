@@ -14,3 +14,4 @@ walletRouter.post(
 );
 
 walletRouter.get('/', authGuard, walletController.getWallets);
+walletRouter.get('/:walletId', authGuard, walletController.getWallet);
