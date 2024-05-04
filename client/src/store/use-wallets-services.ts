@@ -11,7 +11,7 @@ type TWalletServices = {
   shouldRefetch: boolean;
 };
 
-export const useWalletServices = create<TWalletServices>((set, get) => ({
+export const useWalletsServices = create<TWalletServices>((set, get) => ({
   wallets: [],
   loading: false,
   firstFetch: true,

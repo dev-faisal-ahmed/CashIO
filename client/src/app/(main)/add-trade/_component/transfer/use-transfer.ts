@@ -1,5 +1,5 @@
 import { useInput } from '@/hooks/use-input';
-import { useWalletServices } from '@/store/use-wallet-services';
+import { useWalletsServices } from '@/store/use-wallets-services';
 import { TWallet } from '@/utils/types/data.types';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { AddTradeContext } from '../add-trade-context';
@@ -13,7 +13,7 @@ export const useTransfer = () => {
   const [selectedToWallet, setSelectedToWallet] = useState<TWallet>();
   const [fee, onFeeChange, setFeeError] = useInput();
   const [apiLoading, setApiLoading] = useState(false);
-  const { fetch, loading, wallets } = useWalletServices();
+  const { fetch, loading, wallets } = useWalletsServices();
   const { date } = useContext(DatePickerContext)!;
 
   const {

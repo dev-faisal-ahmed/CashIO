@@ -2,7 +2,7 @@ import { DatePickerContext } from '@/components/shared/date-picker/date-picker';
 import { TAddTransactionPayload } from '@/utils/types/server.types';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { useSourceServices } from '@/store/use-source-services';
-import { useWalletServices } from '@/store/use-wallet-services';
+import { useWalletsServices } from '@/store/use-wallets-services';
 import { fetchHelper } from '@/utils/helpers/fetch.helper';
 import { TSource, TTransactionType, TWallet } from '@/utils/types/data.types';
 import { toast } from '@/utils/helpers/toast.helper';
@@ -19,7 +19,7 @@ export const useAddTransaction = () => {
     fetch: fetchWallets,
     wallets,
     loading: walletLoading,
-  } = useWalletServices();
+  } = useWalletsServices();
 
   const {
     states: { amount, selectedTradeType },

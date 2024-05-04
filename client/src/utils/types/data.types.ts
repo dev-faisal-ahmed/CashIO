@@ -21,5 +21,27 @@ export type TSource = {
 };
 
 export type TTransactionType = 'INCOME' | 'EXPENSE';
-
 export type TTradeTypes = 'EXPENSE' | 'INCOME' | 'LEND' | 'BORROW' | 'TRANSFER';
+
+export type TWalletDetailsTransaction = {
+  _id: string;
+  sourceId: {
+    name: string;
+    icon: TIcon;
+  };
+  amount: number;
+  date: string;
+  type: TTransactionType;
+};
+
+export type TWalletDetails = {
+  wallet: {
+    _id: string;
+    name: string;
+    income: number;
+    expense: number;
+    saving: boolean;
+    icon: TIcon;
+  };
+  transactions: TWalletDetailsTransaction[];
+};

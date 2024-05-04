@@ -7,16 +7,17 @@ import { colors } from '@/themes/colors';
 import { getDimension } from '@/utils/helpers/ui.helper';
 import { AddWallet } from './_components/add-wallet/add-wallet';
 import { useEffect, useState } from 'react';
-import { useWalletServices } from '@/store/use-wallet-services';
+import { useWalletsServices } from '@/store/use-wallets-services';
 import { ScreenHeader } from '@/components/shared/screen-header/screen-header';
 import { IconContainer } from '@/components/shared/icon-container/icon-container';
+import { Link } from 'expo-router';
 
 const { height } = getDimension();
 
 export default function Wallet() {
   const { auth, isLoading } = useGetAuth();
   const [showWalletModal, setShowWalletModal] = useState(false);
-  const { wallets, fetch, loading } = useWalletServices((state) => state);
+  const { wallets, fetch, loading } = useWalletsServices((state) => state);
 
   useEffect(() => {
     fetch();
@@ -39,7 +40,11 @@ export default function Wallet() {
         horizontal={false}
         data={wallets}
         numColumns={4}
-        renderItem={(eachData) => <IconContainer {...eachData.item} />}
+        renderItem={(eachData) => (
+          <Link href={`wallet/${eachData.item._id}`}>
+            <IconContainer {...eachData.item} />
+          </Link>
+        )}
         keyExtractor={(eachData) => eachData._id}
         columnWrapperStyle={{ gap: 24 }}
       />
