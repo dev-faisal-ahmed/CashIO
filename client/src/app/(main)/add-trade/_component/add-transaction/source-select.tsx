@@ -43,7 +43,7 @@ export function SourceSelect({
               className="items-center flex-row justify-center"
             >
               {
-                getIcon({ name: selectedSource.icon.name })[
+                getIcon({ name: selectedSource.icon.name, size: 18 })[
                   selectedSource.icon.group
                 ]
               }

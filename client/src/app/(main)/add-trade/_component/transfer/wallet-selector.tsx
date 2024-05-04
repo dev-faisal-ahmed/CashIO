@@ -49,7 +49,7 @@ export function WalletSelector({
               className="items-center flex-row justify-center"
             >
               {
-                getIcon({ name: selectedWallet.icon.name })[
+                getIcon({ name: selectedWallet.icon.name, size: 18 })[
                   selectedWallet.icon.group
                 ]
               }
