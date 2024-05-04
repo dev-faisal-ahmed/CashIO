@@ -44,3 +44,11 @@ export type TAddTransactionPayload = {
   date: number;
   type: TTransactionType;
 };
+
+export type TTransferPayload = {
+  senderWalletId: string;
+  receiverWalletId: string;
+  amount: number;
+  date: number;
+  fee?: number;
+};

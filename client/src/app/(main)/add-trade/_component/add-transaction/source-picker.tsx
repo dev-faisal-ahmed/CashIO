@@ -1,6 +1,6 @@
 import { Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { ActiveButton } from './active-button';
+import { ActiveButton } from '../../../../../components/shared/active-button/active-button';
 import { CloseModal } from '@/components/ui/close-modal';
 import { getIcon } from '@/components/shared/icon/icon-helper';
 import { getDimension } from '@/utils/helpers/ui.helper';

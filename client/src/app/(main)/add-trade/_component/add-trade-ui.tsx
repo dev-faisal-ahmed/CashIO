@@ -11,6 +11,7 @@ import { ScrollView, Text } from 'react-native';
 import { Input } from '@/components/shared/input/input';
 import { TradeTypeButton } from './trade-type-button';
 import { AddTransaction } from './add-transaction/add-transaction';
+import { Transfer } from './transfer/transfer';
 
 const { height } = getDimension();
 
@@ -41,6 +42,9 @@ export function AddTradeUI() {
         {/* add transaction */}
         {(selectedTradeType === 'INCOME' ||
           selectedTradeType === 'EXPENSE') && <AddTransaction />}
+
+        {/* transfer */}
+        {selectedTradeType === 'TRANSFER' && <Transfer />}
       </ScrollView>
       <DayPicker />
       <MonthPicker />

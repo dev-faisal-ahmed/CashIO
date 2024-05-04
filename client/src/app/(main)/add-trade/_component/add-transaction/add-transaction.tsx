@@ -2,7 +2,7 @@ import { Text, View } from 'react-native';
 import { useAddTransaction } from './use-add-transaction';
 import { Loader } from '@/components/ui/loader';
 import { Button } from '@/components/ui/button';
-import { WalletsPicker } from './walletsPicker';
+import { WalletsPicker } from './wallets-picker';
 import { SourcePicker } from './source-picker';
 
 export function AddTransaction() {

@@ -5,7 +5,7 @@ import { CloseModal } from '@/components/ui/close-modal';
 import { getIcon } from '@/components/shared/icon/icon-helper';
 import { getDimension } from '@/utils/helpers/ui.helper';
 import { TWallet } from '@/utils/types/data.types';
-import { ActiveButton } from './active-button';
+import { ActiveButton } from '../../../../../components/shared/active-button/active-button';
 
 type WalletsProps = {
   showWallets: boolean;

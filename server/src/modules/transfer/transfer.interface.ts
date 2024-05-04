@@ -7,5 +7,5 @@ export type TTransfer = {
   senderWalletId: Schema.Types.ObjectId;
   amount: number;
   date: Date;
-  free: number;
+  fee: number;
 };

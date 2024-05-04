@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 import { AddTradeContext } from './add-trade-context';
 import { TTradeTypes } from '@/utils/types/data.types';
 
-const tardeTypes = ['EXPENSE', 'INCOME', 'LEND', 'BORROW', 'TRANSFER'];
+const tardeTypes: TTradeTypes[] = ['EXPENSE', 'INCOME', 'TRANSFER'];
 
 export function TradeTypeButton() {
   const {
@@ -15,18 +15,7 @@ export function TradeTypeButton() {
     <View className="mt-6">
       <Text className="text-white text-base font-bold mb-4">Type</Text>
       <View className="flex-wrap w-full flex-row">
-        {tardeTypes.slice(0, 2).map((eachType) => (
-          <React.Fragment key={eachType}>
-            {tradeButton(
-              eachType,
-              selectedTradeType,
-              onSelectedTradeTypeChange
-            )}
-          </React.Fragment>
-        ))}
-      </View>
-      <View className="flex-wrap w-full flex-row mt-2">
-        {tardeTypes.slice(2, 5).map((eachType) => (
+        {tardeTypes.map((eachType) => (
           <React.Fragment key={eachType}>
             {tradeButton(
               eachType,

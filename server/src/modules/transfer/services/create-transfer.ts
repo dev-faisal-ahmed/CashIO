@@ -66,7 +66,7 @@ export const createTransfer = async (
     // updating receiver wallet
     const updatedReceiverWallet = await Wallet.updateOne(
       { _id: receiverWalletId },
-      { $inc: { income: amount - fee } },
+      { $inc: { income: amount } },
       { session }
     );
 
