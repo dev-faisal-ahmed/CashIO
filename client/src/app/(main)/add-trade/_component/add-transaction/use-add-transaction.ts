@@ -7,6 +7,7 @@ import { fetchHelper } from '@/utils/helpers/fetch.helper';
 import { TSource, TTransactionType, TWallet } from '@/utils/types/data.types';
 import { toast } from '@/utils/helpers/toast.helper';
 import { AddTradeContext } from '../add-trade-context';
+import { useWalletDetailsServices } from '@/store/use-wallet-details-services';
 
 export const useAddTransaction = () => {
   const {
@@ -20,6 +21,8 @@ export const useAddTransaction = () => {
     wallets,
     loading: walletLoading,
   } = useWalletsServices();
+
+  const { enableRefetch } = useWalletDetailsServices();
 
   const {
     states: { amount, selectedTradeType },
@@ -67,6 +70,7 @@ export const useAddTransaction = () => {
       if (!response.ok) throw new Error(response.message);
       toast.success(response.message);
       onAmountChange('');
+      enableRefetch();
     } catch (err: any) {
       console.log(err);
       toast.error('Error Occurred!', err.message || 'Something went wrong');

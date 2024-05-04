@@ -9,6 +9,7 @@ type TWalletDetailsService = {
   fetch: (walletId: string) => void;
   refetch: (walletId: string) => void;
   shouldRefetch: boolean;
+  enableRefetch: () => void;
 };
 
 export const useWalletDetailsServices = create<TWalletDetailsService>(
@@ -27,7 +28,6 @@ export const useWalletDetailsServices = create<TWalletDetailsService>(
 
       try {
         const response = await fetchHelper({ url: `wallet/${id}` });
-        console.log(response);
         if (response.ok)
           set({ walletDetails: response.data as TWalletDetails });
         else set({ walletDetails: undefined });
@@ -44,6 +44,9 @@ export const useWalletDetailsServices = create<TWalletDetailsService>(
       const { fetch } = get();
       set({ shouldRefetch: true });
       fetch(walletId);
+    },
+    enableRefetch: () => {
+      set({ shouldRefetch: true });
     },
   })
 );

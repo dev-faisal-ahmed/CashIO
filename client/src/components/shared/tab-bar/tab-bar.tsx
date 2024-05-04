@@ -12,7 +12,7 @@ export function TabBar() {
   const path = usePathname();
 
   return (
-    <View className="flex-row w-full justify-between px-5 py-2">
+    <View className="flex-row bg-bg-dark w-full justify-between px-5 py-2">
       {generateTabBarLinksLeft(path).map((link) => (
         <Tab key={link.url} {...link} />
       ))}
