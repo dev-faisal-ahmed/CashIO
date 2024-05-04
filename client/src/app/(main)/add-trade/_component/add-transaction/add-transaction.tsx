@@ -1,9 +1,9 @@
-import { Text, View } from 'react-native';
+import { WalletSelector } from '../transfer/wallet-selector';
 import { useAddTransaction } from './use-add-transaction';
+import { SourceSelect } from './source-select';
 import { Loader } from '@/components/ui/loader';
 import { Button } from '@/components/ui/button';
-import { WalletsPicker } from './wallets-picker';
-import { SourcePicker } from './source-picker';
+import { Text, View } from 'react-native';
 
 export function AddTransaction() {
   const {
@@ -14,17 +14,9 @@ export function AddTransaction() {
       walletLoading,
       selectedSource,
       selectedWallet,
-      showSources,
-      showWallets,
       apiLoading,
     },
-    handlers: {
-      onSourceUpdate,
-      setShowSources,
-      onWalletUpdate,
-      setShowWallets,
-      onAddTransaction,
-    },
+    handlers: { onSourceUpdate, onWalletUpdate, onAddTransaction },
   } = useAddTransaction();
 
   if (sourceLoading || walletLoading)
@@ -36,52 +28,32 @@ export function AddTransaction() {
 
   return (
     <>
-      <View>
-        {sources.length && selectedSource ? (
-          <SourcePicker
-            sources={sources}
-            onSourceUpdate={onSourceUpdate}
-            selectedSource={selectedSource}
-            setShowSources={setShowSources}
-            showSources={showSources}
-          />
-        ) : (
-          <>
-            {!sourceLoading && (
-              <Text className="text-white font-bold text-center">
-                No Source Found, Please Add A Source First
-              </Text>
-            )}
-          </>
-        )}
+      <View style={{ gap: 16 }} className="flex-row">
+        <SourceSelect
+          title="Source"
+          selectedSource={selectedSource}
+          onSourceChange={onSourceUpdate}
+          sources={sources}
+        />
 
-        {wallets.length && selectedWallet ? (
-          <WalletsPicker
-            wallets={wallets}
-            onWalletUpdate={onWalletUpdate}
-            selectedWallet={selectedWallet}
-            setShowWallets={setShowWallets}
-            showWallets={showWallets}
-          />
-        ) : (
-          <>
-            {!walletLoading && (
-              <Text className="text-white font-bold text-center">
-                No Wallets Found, Please Add A Wallet First
-              </Text>
-            )}
-          </>
-        )}
+        <WalletSelector
+          title="Wallet"
+          onWalletChange={onWalletUpdate}
+          selectedWallet={selectedWallet}
+          wallets={wallets}
+        />
+      </View>
 
-        <View className="mt-6">
-          {apiLoading ? (
-            <Loader />
-          ) : (
-            <Button onPress={onAddTransaction}>
-              <Text className="text-white">Add Transaction</Text>
-            </Button>
-          )}
-        </View>
+      <View className="mt-8">
+        {apiLoading ? (
+          <Loader />
+        ) : (
+          <Button onPress={onAddTransaction}>
+            <Text className="text-white text-base font-bold">
+              Add Transaction
+            </Text>
+          </Button>
+        )}
       </View>
     </>
   );

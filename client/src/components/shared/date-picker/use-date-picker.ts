@@ -31,7 +31,6 @@ export const useDatePicker = () => {
   };
 
   const updateDay = (day: number) => {
-    console.log(day);
     const currentDate = date;
     currentDate.setDate(day);
     setDate(currentDate);

@@ -72,7 +72,9 @@ export function WalletSelector({
       <Modal animationType="slide" visible={showWallets}>
         <View className="flex-1 bg-bg-dark px-6 py-3">
           <CloseModal onCloseModal={() => setShowWallets(false)} />
-          <Text className="text-white font-bold mt-3">Select {title}</Text>
+          <Text className="text-white text-center font-bold text-base">
+            Select {title}
+          </Text>
 
           {wallets.map((wallet) => (
             <TouchableOpacity

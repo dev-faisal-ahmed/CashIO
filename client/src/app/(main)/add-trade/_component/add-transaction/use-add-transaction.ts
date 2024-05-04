@@ -32,10 +32,8 @@ export const useAddTransaction = () => {
     );
   }, [selectedTradeType, data]);
 
-  const [selectedSource, setSelectedSource] = useState(sources[0]);
-  const [selectedWallet, setSelectedWallet] = useState(wallets[0]);
-  const [showSources, setShowSources] = useState(false);
-  const [showWallets, setShowWallets] = useState(false);
+  const [selectedSource, setSelectedSource] = useState<TSource>();
+  const [selectedWallet, setSelectedWallet] = useState<TWallet>();
   const [apiLoading, setApiLoading] = useState(false);
   const { date } = useContext(DatePickerContext)!;
 
@@ -45,9 +43,15 @@ export const useAddTransaction = () => {
   const onAddTransaction = async () => {
     setAmountError('');
     if (!amount.value) return setAmountError('Amount is required');
+    if (Number(amount.value) < 0)
+      return setAmountError('Amount can has to be greater than zero');
 
     try {
       setApiLoading(true);
+
+      if (!selectedSource) return toast.error('No Source Selected');
+      if (!selectedWallet) return toast.error('No Wallet Selected');
+
       const response = await fetchHelper<any, TAddTransactionPayload>({
         url: '/transaction',
         method: 'POST',
@@ -76,14 +80,6 @@ export const useAddTransaction = () => {
     fetchWallets();
   }, []);
 
-  useEffect(() => {
-    setSelectedSource(sources[0]);
-  }, [sources]);
-
-  useEffect(() => {
-    setSelectedWallet(wallets[0]);
-  }, [wallets]);
-
   return {
     states: {
       sources,
@@ -92,15 +88,11 @@ export const useAddTransaction = () => {
       walletLoading,
       selectedSource,
       selectedWallet,
-      showSources,
-      showWallets,
       apiLoading,
     },
 
     handlers: {
       onSourceUpdate,
-      setShowSources,
-      setShowWallets,
       onWalletUpdate,
       onAddTransaction,
     },
