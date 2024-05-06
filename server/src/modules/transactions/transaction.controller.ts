@@ -16,4 +16,14 @@ const createTransaction = tryCatch(async (req, res) => {
   });
 });
 
-export const transactionController = { createTransaction };
+const getTransactions = tryCatch(async (req, res) => {
+  const transactions = await transactionServices.getTransactions(req.user);
+
+  sendSuccessResponse(res, {
+    status: StatusCodes.OK,
+    message: 'Transaction Retrieved Successfully',
+    data: transactions,
+  });
+});
+
+export const transactionController = { createTransaction, getTransactions };

@@ -12,3 +12,5 @@ transactionRouter.post(
   validationHandler(transactionValidation.CreateTransaction),
   transactionController.createTransaction
 );
+
+transactionRouter.get('/', authGuard, transactionController.getTransactions);
