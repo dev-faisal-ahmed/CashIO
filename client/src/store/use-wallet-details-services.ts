@@ -34,6 +34,7 @@ export const useWalletDetailsServices = create<TWalletDetailsService>(
         set({ shouldRefetch: false });
       } catch (err) {
         console.log(err);
+        set({ shouldRefetch: true });
         // so that it can be fetched later
       } finally {
         set({ loading: false });

@@ -3,13 +3,14 @@ import { Loader } from '@/components/ui/loader';
 import { useGetAuth } from '@/hooks/use-get-auth';
 import { getDimension } from '@/utils/helpers/ui.helper';
 import { useEffect, useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { AddSource } from './_components/add-source/add-source';
 import { Button } from '@/components/ui/button';
 import { colors } from '@/themes/colors';
 import { Entypo } from '@expo/vector-icons';
 import { useSourceServices } from '@/store/use-source-services';
 import { IconContainer } from '@/components/shared/icon-container/icon-container';
+import { Link } from 'expo-router';
 
 const { height } = getDimension();
 
@@ -39,7 +40,11 @@ export default function Source() {
         horizontal={false}
         data={sources}
         numColumns={4}
-        renderItem={(eachData) => <IconContainer {...eachData.item} />}
+        renderItem={(eachData) => (
+          <Link href={`/source/${eachData.item._id}`}>
+            <IconContainer {...eachData.item} />
+          </Link>
+        )}
         keyExtractor={(eachData) => eachData._id}
         columnWrapperStyle={{ gap: 24 }}
       />

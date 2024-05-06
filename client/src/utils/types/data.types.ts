@@ -45,3 +45,29 @@ export type TWalletDetails = {
   };
   transactions: TWalletDetailsTransaction[];
 };
+
+export type TSourceDetailsTransaction = {
+  _id: string;
+  wallet: {
+    name: string;
+    icon: TIcon;
+  }[];
+  amount: number;
+  date: string;
+  type: TTradeTypes;
+};
+
+export type TSourceDetails = {
+  source: {
+    _id: string;
+    name: string;
+    budget: number;
+    icons: TIcon;
+    type: TSourceType;
+  };
+  transactionDetails: {
+    transactions: TSourceDetailsTransaction[];
+    income: number;
+    expense: number;
+  };
+};
