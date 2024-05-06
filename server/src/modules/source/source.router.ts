@@ -13,4 +13,5 @@ sourceRouter.post(
   sourceController.createSource
 );
 
-sourceRouter.get('/', authGuard, sourceController.getSource);
+sourceRouter.get('/', authGuard, sourceController.getSources);
+sourceRouter.get('/:sourceId', authGuard, sourceController.getSource);
