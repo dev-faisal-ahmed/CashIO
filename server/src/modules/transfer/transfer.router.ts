@@ -12,3 +12,5 @@ transferRouter.post(
   validationHandler(transferValidation.CreateTransfer),
   transferController.createTransfer
 );
+
+transferRouter.get('/', authGuard, transferController.getTransfers);
