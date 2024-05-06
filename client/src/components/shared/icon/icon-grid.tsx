@@ -1,7 +1,8 @@
-import { TouchableWithoutFeedback, View } from 'react-native';
-import { TIcon, getIcon } from './icon-helper';
-import { generateArray, generateTuple } from './icon.helpers';
 import React from 'react';
+import { TouchableWithoutFeedback, View } from 'react-native';
+import { TIcon } from './icon-helper';
+import { generateArray, generateTuple } from './icon.helpers';
+import { Icon } from './icon';
 
 type IconGrid = {
   allIcons: TIcon[];
@@ -26,7 +27,7 @@ const iconRow = (
           }
         >
           <View className="items-center justify-center bg-bg-dark/50 mx-3 p-2 rounded-xl">
-            {getIcon({ name: icon.name })[icon.group]}
+            <Icon name={icon.name} group={icon.group} />
           </View>
         </TouchableWithoutFeedback>
       ))}

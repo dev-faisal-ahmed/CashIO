@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Modal, Text, TouchableOpacity, View } from 'react-native';
 import { TWallet } from '@/utils/types/data.types';
-import { getIcon } from '@/components/shared/icon/icon-helper';
 import { CloseModal } from '@/components/ui/close-modal';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { twMerge } from 'tailwind-merge';
+import { Icon } from '@/components/shared/icon/icon';
 
 type WalletFromProps = {
   title: string;
@@ -48,11 +48,12 @@ export function WalletSelector({
               style={{ gap: 10 }}
               className="items-center flex-row justify-center"
             >
-              {
-                getIcon({ name: selectedWallet.icon.name, size: 18 })[
-                  selectedWallet.icon.group
-                ]
-              }
+              <Icon
+                name={selectedWallet.icon.name}
+                group={selectedWallet.icon.group}
+                size={18}
+              />
+
               <Text numberOfLines={1} className="text-white font-bold">
                 {selectedWallet.name}
               </Text>
@@ -84,7 +85,7 @@ export function WalletSelector({
               key={wallet._id}
             >
               <View className="bg-card-bg-dark rounded-md p-2">
-                {getIcon({ name: wallet.icon.name })[wallet.icon.group]}
+                <Icon name={wallet.icon.name} group={wallet.icon.group} />
               </View>
               <Text className="text-white font-bold text-lg">
                 {wallet.name}

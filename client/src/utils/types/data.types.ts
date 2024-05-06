@@ -73,6 +73,7 @@ export type TSourceDetails = {
 };
 
 export type TMetaDataSource = {
+  _id: string;
   info: { name: string; icon: TIcon; budget: number };
   expense: number;
 };

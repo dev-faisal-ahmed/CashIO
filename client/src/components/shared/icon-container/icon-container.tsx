@@ -1,6 +1,7 @@
 import { getDimension } from '@/utils/helpers/ui.helper';
 import { Text, View } from 'react-native';
-import { TIcon, getIcon } from '../icon/icon-helper';
+import { TIcon } from '../icon/icon-helper';
+import { Icon } from '../icon/icon';
 
 type IconContainerProps = {
   name: string;
@@ -17,7 +18,7 @@ export function IconContainer({ name, icon }: IconContainerProps) {
         style={{ width: containerSize, height: containerSize }}
         className="bg-card-bg-dark items-center justify-center rounded-full"
       >
-        {getIcon({ name: icon.name, size: 24 })[icon.group]}
+        <Icon name={icon.name} group={icon.group} size={24} />
       </View>
       <Text className="text-white font-bold text-center mt-2">{name}</Text>
     </View>

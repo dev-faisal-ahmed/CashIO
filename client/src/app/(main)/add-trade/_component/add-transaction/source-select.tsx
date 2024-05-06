@@ -1,10 +1,10 @@
 import { Modal, Text, TouchableOpacity, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { CloseModal } from '@/components/ui/close-modal';
-import { getIcon } from '@/components/shared/icon/icon-helper';
 import { useState } from 'react';
 import { TSource } from '@/utils/types/data.types';
 import { twMerge } from 'tailwind-merge';
+import { Icon } from '@/components/shared/icon/icon';
 
 type SourceSelectPops = {
   title: string;
@@ -42,11 +42,12 @@ export function SourceSelect({
               style={{ gap: 10 }}
               className="items-center flex-row justify-center"
             >
-              {
-                getIcon({ name: selectedSource.icon.name, size: 18 })[
-                  selectedSource.icon.group
-                ]
-              }
+              <Icon
+                name={selectedSource.icon.name}
+                group={selectedSource.icon.group}
+                size={18}
+              />
+
               <Text numberOfLines={1} className="text-white font-bold">
                 {selectedSource.name}
               </Text>
@@ -78,7 +79,7 @@ export function SourceSelect({
               key={source._id}
             >
               <View className="bg-card-bg-dark rounded-md p-2">
-                {getIcon({ name: source.icon.name })[source.icon.group]}
+                <Icon name={source.icon.name} group={source.icon.group} />
               </View>
               <Text className="text-white font-bold text-lg">
                 {source.name}
