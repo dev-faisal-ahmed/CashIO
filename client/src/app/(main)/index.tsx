@@ -1,26 +1,28 @@
-import { Button } from '@/components/ui/button';
-import { toast } from '@/utils/helpers/toast.helper';
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
-import { signOut } from 'firebase/auth';
-import { AUTH } from '@/utils/firebase.config';
+import { View } from 'react-native';
+import { getDimension } from '@/utils/helpers/ui.helper';
+import { ScreenHeader } from '@/components/shared/screen-header/screen-header';
+import { useGetAuth } from '@/hooks/use-get-auth';
+import { useMetaServices } from '@/store/use-meta-services';
+import { useEffect } from 'react';
+import { BalanceCard } from './_component/balance-card';
+
+const { height } = getDimension();
 
 export default function Home() {
-  const handleLogout = async () => {
-    await signOut(AUTH);
-    toast.success('Get Lost MF!');
-  };
+  const { auth } = useGetAuth();
+  const { metaData, fetch } = useMetaServices();
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
-    <View>
-      <StatusBar style="light" />
-      <Text className="text-white">Home Screen</Text>
-      <Button
-        customClass="mt-8 bg-red-500 mx-auto min-w-[180px]"
-        onPress={handleLogout}
-      >
-        <Text className="text-white font-bold text-base">Logout</Text>
-      </Button>
+    <View style={{ height: height - 135, position: 'relative' }}>
+      <ScreenHeader auth={auth!} />
+      <BalanceCard
+        income={metaData?.userInfo.income || 0}
+        expense={metaData?.userInfo.expense || 0}
+      />
     </View>
   );
 }

@@ -71,3 +71,18 @@ export type TSourceDetails = {
     expense: number;
   };
 };
+
+export type TMetaDataSource = {
+  info: { name: string; icon: TIcon; budget: number };
+  expense: number;
+};
+
+export type TMetaData = {
+  userInfo: {
+    income: number;
+    expense: number;
+    borrow: number;
+    lend: number;
+  };
+  sources: TMetaDataSource[];
+};

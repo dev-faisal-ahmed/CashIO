@@ -41,6 +41,7 @@ export const getMetaData = async (user: TUser) => {
           $first: {
             name: '$name',
             icon: '$icon',
+            budget: '$budget',
           },
         },
         expense: {
