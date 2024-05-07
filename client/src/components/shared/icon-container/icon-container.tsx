@@ -20,7 +20,9 @@ export function IconContainer({ name, icon }: IconContainerProps) {
       >
         <Icon name={icon.name} group={icon.group} size={24} />
       </View>
-      <Text className="text-white font-bold text-center mt-2">{name}</Text>
+      <Text className="text-white font-bold text-center mt-2">
+        {name.length > 10 ? name.slice(0, 7) + '...' : name}
+      </Text>
     </View>
   );
 }

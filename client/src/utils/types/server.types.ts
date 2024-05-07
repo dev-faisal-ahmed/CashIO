@@ -54,3 +54,4 @@ export type TTransferPayload = {
 };
 
 export type TEditWalletPayload = Omit<TAddWalletPayload, 'initialBalance'>;
+export type TEditSourcePayload = Omit<TAddSourcePayload, 'type'>;

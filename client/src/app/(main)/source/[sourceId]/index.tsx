@@ -2,13 +2,14 @@ import { ScreenHeader } from '@/components/shared/screen-header/screen-header';
 import { useGetAuth } from '@/hooks/use-get-auth';
 import { getDimension } from '@/utils/helpers/ui.helper';
 import { useLocalSearchParams } from 'expo-router';
-import { useEffect } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Loader } from '@/components/ui/loader';
 import { useSourceDetailsServices } from '@/store/use-source-details-services';
 import { TransactionDetails } from './_components/transaction-details';
 import { useContainer } from '@/hooks/use-container';
+import { EditSource } from './edit-source/edit-source';
 
 const { height } = getDimension();
 
@@ -17,6 +18,7 @@ export default function SourceDetails() {
   const { sourceId } = useLocalSearchParams();
   const { fetch, sourceDetails, loading } = useSourceDetailsServices();
   const { containerSize, handleLayout } = useContainer();
+  const [showEditSource, setShowEditSource] = useState(false);
 
   useEffect(() => {
     if (sourceId) fetch(sourceId as string);
@@ -39,7 +41,9 @@ export default function SourceDetails() {
               <Text className="text-white font-bold text-xl">
                 {sourceDetails.source.name}
               </Text>
-              <AntDesign name="edit" size={24} color="white" />
+              <TouchableOpacity onPress={() => setShowEditSource(true)}>
+                <AntDesign name="edit" size={24} color="white" />
+              </TouchableOpacity>
             </View>
             <View className="border-b border-card-bg-dark pb-3 mt-10">
               {sourceDetails.transactionDetails?.income > 0 && (
@@ -83,6 +87,15 @@ export default function SourceDetails() {
               </Text>
             )}
           </View>
+
+          <EditSource
+            showModal={showEditSource}
+            onCloseModal={() => setShowEditSource(false)}
+            icon={sourceDetails.source.icon}
+            previousName={sourceDetails.source.name}
+            previousBudget={sourceDetails.source.budget}
+            sourceId={sourceId as string}
+          />
         </>
       ) : (
         <Text className="text-white font-bold text-center mt-6">

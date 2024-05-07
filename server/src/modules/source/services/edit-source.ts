@@ -8,7 +8,7 @@ export const editSource = async (
   payload: TEditSourcePayload
 ) => {
   const doesSourceExist = await Source.findOne({ _id: walletId });
-  if (doesSourceExist)
+  if (!doesSourceExist)
     throw new AppError('Source Does Not Exist', StatusCodes.NOT_FOUND);
 
   const updatedSource = await Source.updateOne(

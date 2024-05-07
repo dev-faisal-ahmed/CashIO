@@ -62,7 +62,7 @@ export type TSourceDetails = {
     _id: string;
     name: string;
     budget: number;
-    icons: TIcon;
+    icon: TIcon;
     type: TSourceType;
   };
   transactionDetails: {
