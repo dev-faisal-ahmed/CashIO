@@ -43,7 +43,7 @@ export const useWalletDetailsServices = create<TWalletDetailsService>(
 
     refetch: (walletId: string) => {
       const { fetch } = get();
-      set({ shouldRefetch: true });
+      set({ shouldRefetch: true, walletId });
       fetch(walletId);
     },
     enableRefetch: () => {

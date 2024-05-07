@@ -52,3 +52,5 @@ export type TTransferPayload = {
   date: number;
   fee?: number;
 };
+
+export type TEditWalletPayload = Omit<TAddWalletPayload, 'initialBalance'>;
