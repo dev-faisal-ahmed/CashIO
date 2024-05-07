@@ -6,16 +6,24 @@ import { useMetaServices } from '@/store/use-meta-services';
 import { useEffect } from 'react';
 import { BalanceCard } from './_component/balance-card';
 import { BudgetCard } from './_component/budget-card';
+import { Loader } from '@/components/ui/loader';
 
 const { height } = getDimension();
 
 export default function Home() {
   const { auth } = useGetAuth();
-  const { metaData, fetch } = useMetaServices();
+  const { metaData, fetch, loading } = useMetaServices();
 
   useEffect(() => {
     fetch();
   }, []);
+
+  if (loading)
+    return (
+      <View className="flex-1 mt-20">
+        <Loader />
+      </View>
+    );
 
   return (
     <View style={{ height: height - 135, position: 'relative' }}>

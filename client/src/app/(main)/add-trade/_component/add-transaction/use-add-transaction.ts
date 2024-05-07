@@ -9,6 +9,7 @@ import { toast } from '@/utils/helpers/toast.helper';
 import { AddTradeContext } from '../add-trade-context';
 import { useWalletDetailsServices } from '@/store/use-wallet-details-services';
 import { useSourceDetailsServices } from '@/store/use-source-details-services';
+import { useMetaServices } from '@/store/use-meta-services';
 
 export const useAddTransaction = () => {
   const {
@@ -25,6 +26,7 @@ export const useAddTransaction = () => {
 
   const { enableRefetch: enableWalletRefetch } = useWalletDetailsServices();
   const { enableRefetch: enableSourceRefetch } = useSourceDetailsServices();
+  const { enableRefetch: enableMetaRefetch } = useMetaServices();
 
   const {
     states: { amount, selectedTradeType },
@@ -74,6 +76,7 @@ export const useAddTransaction = () => {
       onAmountChange('');
       enableWalletRefetch();
       enableSourceRefetch();
+      enableMetaRefetch();
     } catch (err: any) {
       console.log(err);
       toast.error('Error Occurred!', err.message || 'Something went wrong');
