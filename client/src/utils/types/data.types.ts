@@ -107,6 +107,7 @@ export type TTransactionSource = {
 };
 
 export type TTransfer = {
+  _id: string;
   senderWalletId: {
     name: string;
     icon: TIcon;

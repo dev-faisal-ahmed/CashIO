@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { TradeButton } from './_components/trade-button';
 import { TTradeButton } from '@/utils/types/data.types';
 import { Transactions } from './_components/transactions/transactions';
-import { Transfer } from '../add-trade/_component/transfer/transfer';
 import { View } from 'react-native';
+import { Transfers } from './_components/transfers/transfers';
 
 const { height } = getDimension();
 
@@ -33,7 +33,7 @@ export default function Trade() {
       </View>
 
       {selectedType === 'TRANSACTION' && <Transactions />}
-      {selectedType === 'TRANSFER' && <Transfer />}
+      {selectedType === 'TRANSFER' && <Transfers />}
     </View>
   );
 }
