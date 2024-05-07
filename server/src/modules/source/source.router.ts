@@ -15,3 +15,10 @@ sourceRouter.post(
 
 sourceRouter.get('/', authGuard, sourceController.getSources);
 sourceRouter.get('/:sourceId', authGuard, sourceController.getSource);
+
+sourceRouter.patch(
+  '/:sourceId',
+  authGuard,
+  validationHandler(sourceValidation.EditSource),
+  sourceController.editSource
+);

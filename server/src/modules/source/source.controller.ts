@@ -34,4 +34,20 @@ const getSource = tryCatch(async (req, res) => {
   });
 });
 
-export const sourceController = { createSource, getSources, getSource };
+const editSource = tryCatch(async (req, res) => {
+  const { sourceId } = req.params;
+  const updatedSource = await sourceServices.editSource(sourceId, req.body);
+
+  sendSuccessResponse(res, {
+    status: StatusCodes.OK,
+    message: 'Source Updated Successfully',
+    data: updatedSource,
+  });
+});
+
+export const sourceController = {
+  createSource,
+  getSources,
+  getSource,
+  editSource,
+};
