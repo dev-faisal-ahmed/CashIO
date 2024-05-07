@@ -106,4 +106,19 @@ export type TTransactionSource = {
   icon: TIcon;
 };
 
+export type TTransfer = {
+  senderWalletId: {
+    name: string;
+    icon: TIcon;
+  };
+
+  receiverWalletId: {
+    name: string;
+    icon: TIcon;
+  };
+
+  amount: number;
+  date: string;
+};
+
 export type TTradeButton = 'TRANSACTION' | 'TRANSFER';

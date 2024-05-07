@@ -2,10 +2,11 @@ import { ScreenHeader } from '@/components/shared/screen-header/screen-header';
 import { useGetAuth } from '@/hooks/use-get-auth';
 import { getDimension } from '@/utils/helpers/ui.helper';
 import { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
 import { TradeButton } from './_components/trade-button';
 import { TTradeButton } from '@/utils/types/data.types';
 import { Transactions } from './_components/transactions/transactions';
+import { Transfer } from '../add-trade/_component/transfer/transfer';
+import { View } from 'react-native';
 
 const { height } = getDimension();
 
@@ -30,7 +31,9 @@ export default function Trade() {
           index={1}
         />
       </View>
+
       {selectedType === 'TRANSACTION' && <Transactions />}
+      {selectedType === 'TRANSFER' && <Transfer />}
     </View>
   );
 }
