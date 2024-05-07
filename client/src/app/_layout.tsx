@@ -18,7 +18,7 @@ export default function RootLayout() {
           options={{ headerShown: false }}
         />
       </Stack>
-      <Toast config={toastConfig} visibilityTime={2500} />
+      <Toast config={toastConfig} visibilityTime={3000} />
     </SafeAreaView>
   );
 }

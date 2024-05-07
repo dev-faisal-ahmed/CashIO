@@ -13,7 +13,7 @@ export const createTransaction = async (
   payload: TCreateTransactionPayload
 ) => {
   const session = await mongoose.startSession();
-  const { amount, sourceId, walletId, fee = 0 } = payload;
+  const { amount, sourceId, walletId, type, fee = 0 } = payload;
   const userId = user._id;
 
   try {
@@ -28,7 +28,14 @@ export const createTransaction = async (
     if (!isWalletExist)
       throw new AppError('Wallet not found', StatusCodes.NOT_FOUND);
 
-    const { type } = isSourceExist.toObject();
+    isWalletExist.toObject();
+
+    if (type === 'EXPENSE') {
+      const balance = isWalletExist.income - isWalletExist.expense;
+      if (balance < amount)
+        throw new AppError('Insufficient Balance', StatusCodes.BAD_REQUEST);
+    }
+
     const date = new Date(payload.date);
 
     // adding new transactions

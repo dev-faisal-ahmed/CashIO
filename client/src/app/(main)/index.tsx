@@ -1,26 +1,54 @@
-import { Button } from '@/components/ui/button';
-import { toast } from '@/utils/helpers/toast.helper';
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
-import { signOut } from 'firebase/auth';
-import { AUTH } from '@/utils/firebase.config';
+import { FlatList, Text, View } from 'react-native';
+import { getDimension } from '@/utils/helpers/ui.helper';
+import { ScreenHeader } from '@/components/shared/screen-header/screen-header';
+import { useGetAuth } from '@/hooks/use-get-auth';
+import { useMetaServices } from '@/store/use-meta-services';
+import { useEffect } from 'react';
+import { BalanceCard } from './_component/balance-card';
+import { BudgetCard } from './_component/budget-card';
+import { Loader } from '@/components/ui/loader';
+
+const { height } = getDimension();
 
 export default function Home() {
-  const handleLogout = async () => {
-    await signOut(AUTH);
-    toast.success('Get Lost MF!');
-  };
+  const { auth } = useGetAuth();
+  const { metaData, fetch, loading } = useMetaServices();
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  if (loading)
+    return (
+      <View className="flex-1 mt-20">
+        <Loader />
+      </View>
+    );
 
   return (
-    <View>
-      <StatusBar style="light" />
-      <Text className="text-white">Home Screen</Text>
-      <Button
-        customClass="mt-8 bg-red-500 mx-auto min-w-[180px]"
-        onPress={handleLogout}
-      >
-        <Text className="text-white font-bold text-base">Logout</Text>
-      </Button>
+    <View style={{ height: height - 135, position: 'relative' }}>
+      <ScreenHeader auth={auth!} />
+      <BalanceCard
+        income={metaData?.userInfo.income || 0}
+        expense={metaData?.userInfo.expense || 0}
+      />
+      <Text className="text-white mt-10 font-bold text-lg">Budgets</Text>
+      {metaData?.sources.length ? (
+        <FlatList
+          style={{ marginTop: 24 }}
+          contentContainerStyle={{ gap: 16 }}
+          data={metaData?.sources}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) => item._id}
+          renderItem={({ item: data }) => (
+            <BudgetCard expense={data.expense} info={data.info} />
+          )}
+        />
+      ) : (
+        <Text className="text-white text-center font-bold mt-6">
+          No Budget Is Set
+        </Text>
+      )}
     </View>
   );
 }

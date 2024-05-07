@@ -1,11 +1,11 @@
 import { GoogleLogin } from '@/components/shared/google-login/google.login';
 import { StatusBar } from 'expo-status-bar';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
-import { useLogin } from './use-login';
 import { Input } from '@/components/shared/input/input';
 import { Loader } from '@/components/ui/loader';
 import { Button } from '@/components/ui/button';
 import { Link } from 'expo-router';
+import { useLogin } from './use-login';
 
 export default function Login() {
   const { states, handlers } = useLogin();

@@ -14,3 +14,11 @@ walletRouter.post(
 );
 
 walletRouter.get('/', authGuard, walletController.getWallets);
+walletRouter.get('/:walletId', authGuard, walletController.getWallet);
+
+walletRouter.patch(
+  '/:walletId',
+  authGuard,
+  validationHandler(walletValidation.EditWallet),
+  walletController.editWallet
+);

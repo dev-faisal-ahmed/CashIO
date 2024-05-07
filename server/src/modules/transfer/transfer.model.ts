@@ -18,7 +18,7 @@ const TransferSchema = new Schema<TTransfer>({
 
   amount: { type: Number, required: true },
   date: { type: Date, required: true },
-  free: { type: Number, default: 0 },
+  fee: { type: Number, default: 0 },
 });
 
 export const Transfer = model('transfer', TransferSchema);

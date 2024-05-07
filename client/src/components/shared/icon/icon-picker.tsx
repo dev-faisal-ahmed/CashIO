@@ -2,11 +2,12 @@ import { TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { Sheet } from '@/components/ui/sheet';
-import { TIconGroup, TIconName, TIcon, getIcon } from './icon-helper';
+import { TIconGroup, TIconName, TIcon } from './icon-helper';
 import { icons } from './icons';
 import { useKeyboard } from '@/hooks/use-keyboard';
 import { twMerge } from 'tailwind-merge';
 import { getDimension } from '@/utils/helpers/ui.helper';
+import { Icon } from './icon';
 
 type TIcons = Record<string, Record<string, string>>;
 const iconsArray = Object.keys(icons).reduce(
@@ -54,11 +55,11 @@ export function IconPicker({ icon, updateIcon }: IconPickerProps) {
       >
         {icon ? (
           <>
-            {
-              getIcon({ name: icon.name, size: keyboardShown ? 50 : 100 })[
-                icon.group
-              ]
-            }
+            <Icon
+              name={icon.name}
+              group={icon.group}
+              size={keyboardShown ? 50 : 100}
+            />
           </>
         ) : (
           <AntDesign name="plus" size={40} color="white" />
@@ -86,11 +87,11 @@ export function IconPicker({ icon, updateIcon }: IconPickerProps) {
                 style={{ width: iconContainerWidth }}
                 className="items-center justify-center bg-bg-dark/60 p-2 rounded-xl"
               >
-                {
-                  getIcon({ name: icon.name as TIconName, size: 20 })[
-                    icon.group as TIconGroup
-                  ]
-                }
+                <Icon
+                  name={icon.name as TIconName}
+                  group={icon.group as TIconGroup}
+                  size={20}
+                />
               </View>
             </TouchableWithoutFeedback>
           ))}

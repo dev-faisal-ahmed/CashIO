@@ -1,6 +1,6 @@
 import { TIcon } from '@/components/shared/icon/icon-helper';
 import { useInput } from '@/hooks/use-input';
-import { useWalletServices } from '@/store/use-wallet-services';
+import { useWalletsServices } from '@/store/use-wallets-services';
 import { fetchHelper } from '@/utils/helpers/fetch.helper';
 import { toast } from '@/utils/helpers/toast.helper';
 import { TAddWalletPayload } from '@/utils/types/server.types';
@@ -16,7 +16,7 @@ export const useAddWallet = ({ onCloseModal }: TUseAddWallet) => {
   const [icon, setIcon] = useState<TIcon>();
   const [isSavingWallet, setIsSavingWallet] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { refetch } = useWalletServices((state) => state);
+  const { refetch } = useWalletsServices((state) => state);
 
   const updateIcon = (payload: TIcon) => {
     setIcon(payload);

@@ -17,7 +17,7 @@ export function Button({ children, onPress, customClass }: ButtonProps) {
   return (
     <TouchableOpacity
       className={twMerge(
-        'bg-primary-500 px-5 py-3 items-center rounded-full',
+        'bg-primary-500 px-5 py-3 items-center rounded-xl',
         customClass
       )}
       onPress={onPress}

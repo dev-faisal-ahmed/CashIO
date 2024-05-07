@@ -4,7 +4,8 @@ import { TWallet } from './wallet.interface';
 const WalletSchema = new Schema<TWallet>({
   name: { type: String, trim: true, required: true },
   userId: { type: Schema.Types.ObjectId, ref: 'user', required: true },
-  initialBalance: { type: Number, default: 0 },
+  income: { type: Number, default: 0 },
+  expense: { type: Number, default: 0 },
   saving: { type: Boolean, default: false },
   icon: {
     type: {

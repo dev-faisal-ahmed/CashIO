@@ -13,4 +13,14 @@ const createTransfer = tryCatch(async (req, res) => {
   });
 });
 
-export const transferController = { createTransfer };
+const getTransfers = tryCatch(async (req, res) => {
+  const transfers = await transferServices.getTransfers(req.user);
+
+  sendSuccessResponse(res, {
+    status: StatusCodes.OK,
+    message: 'Transfer Retrieved Successfully',
+    data: transfers,
+  });
+});
+
+export const transferController = { createTransfer, getTransfers };
