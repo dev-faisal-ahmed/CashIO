@@ -87,3 +87,23 @@ export type TMetaData = {
   };
   sources: TMetaDataSource[];
 };
+
+export type TTransaction = {
+  _id: string;
+  walletId: TTransactionWallet;
+  sourceId: TTransactionSource;
+  amount: number;
+  date: string;
+  type: TTransactionType;
+};
+
+export type TTransactionWallet = {
+  name: string;
+};
+
+export type TTransactionSource = {
+  name: string;
+  icon: TIcon;
+};
+
+export type TTradeButton = 'TRANSACTION' | 'TRANSFER';
