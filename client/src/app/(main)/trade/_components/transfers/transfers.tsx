@@ -19,13 +19,11 @@ export function Transfers() {
     );
 
   return (
-    <View className="mt-6">
-      <FlatList
-        data={transfers}
-        contentContainerStyle={{ gap: 16 }}
-        renderItem={({ item }) => <TransferContainer {...item} />}
-        keyExtractor={(item) => item._id}
-      />
-    </View>
+    <FlatList
+      data={transfers}
+      contentContainerStyle={{ gap: 16 }}
+      renderItem={({ item }) => <TransferContainer {...item} />}
+      keyExtractor={(item) => item._id}
+    />
   );
 }

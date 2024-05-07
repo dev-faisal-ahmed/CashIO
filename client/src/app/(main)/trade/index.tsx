@@ -1,12 +1,12 @@
-import { ScreenHeader } from '@/components/shared/screen-header/screen-header';
-import { useGetAuth } from '@/hooks/use-get-auth';
-import { getDimension } from '@/utils/helpers/ui.helper';
 import { useState } from 'react';
-import { TradeButton } from './_components/trade-button';
-import { TTradeButton } from '@/utils/types/data.types';
-import { Transactions } from './_components/transactions/transactions';
 import { View } from 'react-native';
+import { useGetAuth } from '@/hooks/use-get-auth';
+import { TTradeButton } from '@/utils/types/data.types';
+import { TradeButton } from './_components/trade-button';
+import { getDimension } from '@/utils/helpers/ui.helper';
 import { Transfers } from './_components/transfers/transfers';
+import { Transactions } from './_components/transactions/transactions';
+import { ScreenHeader } from '@/components/shared/screen-header/screen-header';
 
 const { height } = getDimension();
 
@@ -32,8 +32,10 @@ export default function Trade() {
         />
       </View>
 
-      {selectedType === 'TRANSACTION' && <Transactions />}
-      {selectedType === 'TRANSFER' && <Transfers />}
+      <View className="flex-1 mt-8">
+        {selectedType === 'TRANSACTION' && <Transactions />}
+        {selectedType === 'TRANSFER' && <Transfers />}
+      </View>
     </View>
   );
 }

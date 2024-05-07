@@ -19,14 +19,12 @@ export function Transactions() {
     );
 
   return (
-    <View className="mt-5 flex-1">
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ gap: 16 }}
-        data={transactions}
-        renderItem={({ item }) => <TransactionContainer {...item} />}
-        keyExtractor={(item) => item._id}
-      />
-    </View>
+    <FlatList
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ gap: 16 }}
+      data={transactions}
+      renderItem={({ item }) => <TransactionContainer {...item} />}
+      keyExtractor={(item) => item._id}
+    />
   );
 }
