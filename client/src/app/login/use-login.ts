@@ -7,11 +7,21 @@ import { fetchHelper } from '@/utils/helpers/fetch.helper';
 import { TLoginPayload } from '@/utils/types/server.types';
 import { setToken } from '@/utils/helpers/token.helper';
 import { router } from 'expo-router';
+import { useMetaServices } from '@/store/use-meta-services';
+import { useSourceServices } from '@/store/use-source-services';
+import { useTransactionServices } from '@/store/use-transaction-services';
+import { useTransferServices } from '@/store/use-transfer-services';
+import { useWalletsServices } from '@/store/use-wallets-services';
 
 export const useLogin = () => {
   const [email, onEmailChange, setEmailError] = useInput();
   const [password, onPasswordChange, setPasswordError] = useInput();
   const [loading, setLoading] = useState(false);
+  const { enableRefetch: enableMetaRefetch } = useMetaServices();
+  const { refetch: sourceRefetch } = useSourceServices();
+  const { enableRefetch: enableTransactionRefetch } = useTransactionServices();
+  const { enableRefetch: enableTransferRefetch } = useTransferServices();
+  const { refetch: walletRefetch } = useWalletsServices();
 
   const handleLogin = async () => {
     setEmailError('');
@@ -37,6 +47,11 @@ export const useLogin = () => {
       toast.success(response.message);
       setToken(response.data?.token!);
 
+      enableMetaRefetch();
+      sourceRefetch();
+      enableTransactionRefetch();
+      enableTransferRefetch();
+      walletRefetch();
       router.replace('/');
     } catch (err: any) {
       console.log(err);
