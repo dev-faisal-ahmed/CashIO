@@ -13,7 +13,7 @@ export function ProfileIcon({ name, imageUrl }: ProfileIconProps) {
           <Image source={{ uri: imageUrl }} />
         ) : (
           <View>
-            <Text className="text-2xl font-bold text-bg-dark">{name[0]}</Text>
+            <Text className="text-2xl font-bold text-bg-dark">{name?.[0]}</Text>
           </View>
         )}
       </View>
