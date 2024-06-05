@@ -22,7 +22,7 @@ export function Transactions() {
     <FlatList
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ gap: 16 }}
-      data={transactions}
+      data={transactions?.reverse()}
       renderItem={({ item }) => <TransactionContainer {...item} />}
       keyExtractor={(item) => item._id}
     />

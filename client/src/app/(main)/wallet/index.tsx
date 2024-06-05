@@ -41,7 +41,7 @@ export default function Wallet() {
         data={wallets}
         numColumns={4}
         renderItem={(eachData) => (
-          <Link href={`wallet/${eachData.item._id}`}>
+          <Link className="mt-4" href={`wallet/${eachData.item._id}`}>
             <IconContainer {...eachData.item} />
           </Link>
         )}

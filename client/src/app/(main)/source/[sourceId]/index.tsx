@@ -58,11 +58,20 @@ export default function SourceDetails() {
                   Expense : {sourceDetails.transactionDetails.expense}
                 </Text>
               )}
+
+              {!sourceDetails.transactionDetails?.income &&
+                !sourceDetails.transactionDetails?.income && (
+                  <Text className="text-white font-bold text-2xl">
+                    {sourceDetails.source.type === 'INCOME' ||
+                      (sourceDetails.source.type === 'BOTH' && 'INCOME : 0')}
+                    {sourceDetails.source.type === 'EXPENSE' && 'EXPENSE : 0'}
+                  </Text>
+                )}
             </View>
           </View>
 
           <View>
-            {sourceDetails.transactionDetails.transactions.length ? (
+            {sourceDetails.transactionDetails?.transactions?.length ? (
               <>
                 <Text className="text-white text-base font-bold mt-8 mb-6">
                   Wallet History

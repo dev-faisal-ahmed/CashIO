@@ -20,7 +20,7 @@ export function Transfers() {
 
   return (
     <FlatList
-      data={transfers}
+      data={transfers?.reverse()}
       contentContainerStyle={{ gap: 16 }}
       renderItem={({ item }) => <TransferContainer {...item} />}
       keyExtractor={(item) => item._id}
